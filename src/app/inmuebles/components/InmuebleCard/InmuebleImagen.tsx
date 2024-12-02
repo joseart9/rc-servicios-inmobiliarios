@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Spinner } from "@nextui-org/react";
 
-export default function InmuebleImage({ inmueble }: { inmueble: any }) {
+export default function InmuebleImage({ inmueble, openImageModal }: { inmueble: any; openImageModal?: Function }) {
     const [isLoading, setIsLoading] = useState(true);
 
     return (
@@ -17,6 +17,7 @@ export default function InmuebleImage({ inmueble }: { inmueble: any }) {
                     src={inmueble.imagenes[0].url}
                     alt={inmueble.nombre}
                     onLoad={() => setIsLoading(false)}
+                    onClick={() => openImageModal && openImageModal(0)}
                 />
             )}
         </div>

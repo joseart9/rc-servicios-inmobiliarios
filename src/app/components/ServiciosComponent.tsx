@@ -115,10 +115,10 @@ export default function ServiciosComponent() {
                             initial="hidden"
                             animate={isVisible ? "visible" : "hidden"}
                             variants={cardVariants}
-                            className="w-full h-full py-1"
+                            className="w-full h-full pb-4 pt-1"
                             viewport={{ once: true }}
                         >
-                            <Card isPressable className="flex w-[300px] h-[400px] flex-shrink-0 bg-inherit shadow-md" shadow="none">
+                            <Card isPressable className="flex w-[300px] h-[400px] flex-shrink-0 bg-inherit shadow-md shadow-primary-light/15" shadow="none">
                                 <CardBody className="p-4">
                                     <div className="w-full h-full flex flex-col items-center gap-8">
                                         <Image
@@ -133,7 +133,7 @@ export default function ServiciosComponent() {
                                             <p className="text-center text-primary-dark text-3xl font-semibold">
                                                 {servicio.title}
                                             </p>
-                                            <p className="text-pretty text-md text-primary-light/60 font-medium px-8">
+                                            <p className="text-md text-pretty text-primary-dark/40 font-medium px-8">
                                                 {servicio.description}
                                             </p>
                                         </div>

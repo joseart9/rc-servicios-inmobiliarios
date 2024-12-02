@@ -8,6 +8,8 @@ import {
   query,
   where,
   Query,
+  orderBy,
+  Timestamp,
 } from "firebase/firestore";
 import db from "@/db";
 import Inmueble from "@/types/Inmueble";
@@ -38,10 +40,11 @@ export async function getInmuebles(): Promise<Inmueble[]> {
     // Obtener todos los documentos de la colección
     const querySnapshot = await getDocs(inmueblesCollection);
 
-    // Mapear los documentos a objetos de tipo Inmueble
-    const inmuebles: Inmueble[] = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-    })) as Inmueble[];
+    const inmuebles: Inmueble[] = querySnapshot.docs.map((doc) => {
+      const data = JSON.parse(JSON.stringify(doc.data())); // Asegúrate de que no hay referencias al objeto original
+      delete data.createdAt; // Remueve el campo "createdAt"
+      return data;
+    }) as unknown as Inmueble[];
 
     return inmuebles;
   } catch (error) {
@@ -50,18 +53,26 @@ export async function getInmuebles(): Promise<Inmueble[]> {
   }
 }
 
+export interface orderByField {
+  field: string;
+  direction: "asc" | "desc";
+}
+
 export async function getInmueblesFiltered(
-  filtro: string,
-  subFiltro?: FilterComponentProps[]
+  filtro?: string,
+  subFiltro?: FilterComponentProps[],
+  orderByData?: orderByField
 ): Promise<Inmueble[]> {
   try {
     const inmueblesCollection = collection(firestore, "inmuebles");
 
-    // Start the query with the 'tipoOperacion' filter
-    let q: Query = query(
-      inmueblesCollection,
-      where("tipoOperacion", "==", filtro)
-    );
+    // Inicia la consulta sin condiciones si no hay filtro
+    let q: Query = inmueblesCollection;
+
+    // Agrega la condición de "tipoOperacion" solo si el filtro está definido
+    if (filtro) {
+      q = query(q, where("tipoOperacion", "==", filtro));
+    }
 
     // Mapping of filterKey to Firestore field paths
     const fieldPathMapping: { [key: string]: string } = {
@@ -99,43 +110,43 @@ export async function getInmueblesFiltered(
       descripcion: "descripcion",
       amueblado: "amueblado",
       tipoInmueble: "tipoInmueble",
+      // Timestamps
+      createdAt: "createdAt",
     };
 
     if (subFiltro) {
-      // Loop through subFiltro and add filters to the query
       for (const filter of subFiltro) {
         const { filterKey, value, type } = filter;
 
         const fieldPath = fieldPathMapping[filterKey!];
-
-        if (!fieldPath) {
-          console.warn(
-            `No field path mapping found for filterKey: ${filterKey}`
-          );
-          continue; // Skip this filter if mapping not found
-        }
+        if (!fieldPath) continue;
 
         if (type === "slider" && Array.isArray(value)) {
           const [minValue, maxValue] = value;
           q = query(q, where(fieldPath, ">=", minValue));
           q = query(q, where(fieldPath, "<=", maxValue));
-        } else if (type === "select") {
+        } else if (type === "select" || type === "checkbox") {
           q = query(q, where(fieldPath, "==", value));
-        } else if (type === "checkbox") {
-          q = query(q, where(fieldPath, "==", value));
-        } else {
-          console.warn(`Unhandled filter type: ${type}`);
         }
       }
     }
 
-    // Execute the query
+    if (orderByData?.field) {
+      const fieldPath = fieldPathMapping[orderByData.field];
+      if (fieldPath) {
+        q = query(q, orderBy(fieldPath, orderByData?.direction));
+      }
+    }
+
     const querySnapshot = await getDocs(q);
 
-    // Map documents to Inmueble objects
-    const inmuebles: Inmueble[] = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-    })) as Inmueble[];
+    const inmuebles: Inmueble[] = querySnapshot.docs.map((doc) => {
+      const data = JSON.parse(JSON.stringify(doc.data())); // Asegúrate de que no hay referencias al objeto original
+      delete data.createdAt; // Remueve el campo "createdAt"
+      return data;
+    }) as unknown as Inmueble[];
+
+    console.log("INMUEBLESSSSSSSSS", inmuebles);
 
     return inmuebles;
   } catch (error) {
@@ -163,7 +174,13 @@ export async function getInmueble(
     }
 
     // Devolver los datos del primer documento encontrado
-    return querySnapshot.docs[0].data() as Inmueble;
+    const data = querySnapshot.docs[0].data();
+    const { createdAt, ...filteredData } = data;
+    return {
+      ...filteredData,
+      createdAt: createdAt?.toDate().toISOString() || null,
+    } as Inmueble;
+    // return querySnapshot.docs[0].data() as Inmueble;
   } catch (error) {
     console.error("Error al obtener el inmueble: ", error);
     throw new Error("No se pudo obtener el inmueble");

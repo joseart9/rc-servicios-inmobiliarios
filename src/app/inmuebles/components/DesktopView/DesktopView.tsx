@@ -12,20 +12,50 @@ import { usePathname } from 'next/navigation'
 import useInmuebles from "@/hooks/useInmuebles";
 
 import { Spinner } from "@nextui-org/spinner";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FilterComponentProps } from "@/app/inmuebles/components/FilterComponent/FilterComponent";
 
 import icons from "@/Icons";
 import { Button } from "@nextui-org/button";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip, Menu, select } from "@nextui-org/react";
+import { orderByField } from "@/server/actions/inmuebles";
+
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import type { Selection } from "@nextui-org/react";
 
 export default function DesktopViewComponent({ type }: { type: string }) {
     const pathname = usePathname();
     const [filters, setFilters] = useState<FilterComponentProps[]>([]);
+    const [orderBy, setOrderBy] = useState<string>("asc");
+    const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([""]));
+    const [orderByFilter, setOrderByFilter] = useState<orderByField>();
 
-    const { inmuebles, loading, error } = useInmuebles({ filter: type, subFilter: filters });
+    const selectedValue = useMemo(
+        () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+        [selectedKeys]
+    );
 
-    console.log("FILTROS ACTIVOS:", filters)
+    useEffect(() => {
+        if (selectedValue) {
+            setOrderByFilter({
+                field: selectedValue,
+                direction: orderBy as "asc" | "desc",
+            });
+        } else {
+            setOrderByFilter(undefined);
+        }
+    }, [orderBy, selectedValue]);
+
+    const { inmuebles, loading, error } = useInmuebles({ filter: type, subFilter: filters, orderByData: orderByFilter });
+
+    function handleOrdenar() {
+        setOrderBy(orderBy === "asc" ? "desc" : "asc");
+    }
+
+    function handleDeleteOrder() {
+        setOrderBy("");
+        setSelectedKeys(new Set([""]));
+    }
 
     if (error) {
         return (
@@ -37,6 +67,23 @@ export default function DesktopViewComponent({ type }: { type: string }) {
             </div>
         )
     }
+
+    const orderByValues = [
+        {
+            key: "monto",
+            value: "Precio"
+        },
+        {
+            key: "recamaras",
+            value: "Recamaras"
+        }
+    ]
+
+    // Encontrar el texto legible para mostrar en el botón
+    const selectedDisplayValue = useMemo(() => {
+        const selectedItem = orderByValues.find(item => item.key === selectedValue);
+        return selectedItem ? selectedItem.value : "";
+    }, [selectedValue]);
 
 
     return (
@@ -58,16 +105,92 @@ export default function DesktopViewComponent({ type }: { type: string }) {
                     <h1 className="uppercase text-primaryDark text-2xl font-semibold">
                         Inmuebles en {type}
                     </h1>
-                    <Tooltip content="Ordenar por" color="warning" className="text-white">
-                        <Button isIconOnly color="warning" variant="light">
-                            <icons.ordenar className="text-2xl text-primary-dark" />
-                        </Button>
-                    </Tooltip>
+                    <div className="flex flex-row gap-1 items-center">
+                        {selectedValue === "" && (
+                            <Dropdown>
+                                <DropdownTrigger>
+                                    <Button
+                                        variant="light"
+                                        className="capitalize text-xl"
+                                        color="warning"
+                                        startContent={
+                                            <icons.ordenar className="text-2xl text-primaryDark" />
+                                        }
+                                        size="md"
+                                        isIconOnly
+                                    >
+                                    </Button>
+                                </DropdownTrigger>
+                                <DropdownMenu
+                                    aria-label="Single selection example"
+                                    variant="flat"
+                                    disallowEmptySelection
+                                    selectionMode="single"
+                                    selectedKeys={selectedKeys}
+                                    onSelectionChange={setSelectedKeys}
+                                >
+                                    {orderByValues.map((item) => (
+                                        <DropdownItem key={item.key}>
+                                            {item.value}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown>
+                        )}
 
+                        {selectedValue !== "" && (
+                            <div className="flex flex-row gap-1">
+                                {orderBy === "asc" ? (
+                                    <Tooltip content="Ascendente" showArrow color="warning" className="text-white">
+                                        <Button size="md" isIconOnly variant="light" color="warning" onClick={handleOrdenar} >
+                                            <icons.sortUp className="text-xl text-primaryDark" />
+                                        </Button>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip content="Descendente" showArrow color="warning" className="text-white">
+                                        <Button size="md" isIconOnly variant="light" color="warning" onClick={handleOrdenar} >
+                                            <icons.sortDown className="text-xl text-primaryDark" />
+                                        </Button>
+                                    </Tooltip>
+                                )}
+                                <Dropdown>
+                                    <DropdownTrigger>
+                                        <Button
+                                            variant="light"
+                                            className="capitalize text-lg"
+                                            color="warning"
+                                            size="md"
+                                        >
+                                            {selectedDisplayValue}
+                                        </Button>
+                                    </DropdownTrigger>
+                                    <DropdownMenu
+                                        aria-label="Single selection example"
+                                        variant="flat"
+                                        disallowEmptySelection
+                                        selectionMode="single"
+                                        selectedKeys={selectedKeys}
+                                        onSelectionChange={setSelectedKeys}
+                                    >
+                                        {orderByValues.map((item) => (
+                                            <DropdownItem key={item.key}>
+                                                {item.value}
+                                            </DropdownItem>
+                                        ))}
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </div>
+                        )}
+
+                        {selectedValue !== "" && (
+                            <Tooltip content="Eliminar" showArrow color="warning" className="text-white">
+                                <Button size="sm" isIconOnly variant="light" color="warning" onClick={handleDeleteOrder} >
+                                    <icons.close className="text-md text-primaryDark" />
+                                </Button>
+                            </Tooltip>
+                        )}
+                    </div>
                 </section>
-            </div>
-            <div className="lg:hidden">
-                ads
             </div>
 
             <section className="grid grid-cols-12 gap-2 h-full w-full">
@@ -96,8 +219,6 @@ export default function DesktopViewComponent({ type }: { type: string }) {
                             </div>
                         )}
                     </>}
-
-
                 </section>
             </section>
         </section>
