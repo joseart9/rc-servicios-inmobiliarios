@@ -1,0 +1,375 @@
+[
+  {
+    "idInmueble": "12837890asd0921",
+    "nombre": "Nombre",
+    "descripcion": "Descripcion",
+    "amueblado": true,
+    "direccion": {
+      "calle": "caliza",
+      "numeroExterior": "1201",
+      "colonia": "Canterias",
+      "ciudad": "Monterrey",
+      "estado": "Nuevo Leon",
+      "pais": "Mexico",
+      "cp": "64989"
+    },
+    "tipoInmueble": "casa",
+    "terreno": {
+      "terreno": 200,
+      "superficieTotal": 300,
+      "superficieCubierta": 200
+    },
+    "tipoOperacion": "venta",
+    "precio": {
+      "monto": 1000000,
+      "moneda": "MXN",
+      "incluyeIVA": false,
+      "iva": 0.16,
+      "montoTotal": 1160000
+    },
+    "imagenes": [],
+    "caracteristicas": {
+      "recamaras": 3,
+      "medioBanos": 1,
+      "banosCompletos": 2,
+      "estacionamientos": 2,
+      "antiguedad": "usada",
+      "antiguedadTiempo": 2,
+      "niveles": 2,
+      "amenidades": [
+        {
+          "idAmenidad": "123123123",
+          "nombre": "👙 alberca"
+        }
+      ],
+      "servicios": [
+        {
+          "idServicio": "123123123",
+          "nombre": "agua"
+        }
+      ],
+      "mascotas": true,
+      "privada": true
+    }
+  },
+  {
+    "idInmueble": "asd9238098123081",
+    "nombre": "Departamento en la ciudad",
+    "descripcion": "Departamento moderno con acabados de lujo",
+    "amueblado": false,
+    "direccion": {
+      "calle": "Avenida Reforma",
+      "numeroExterior": "45",
+      "colonia": "Centro",
+      "ciudad": "Ciudad de México",
+      "estado": "CDMX",
+      "pais": "México",
+      "cp": "06700"
+    },
+    "tipoInmueble": "departamento",
+    "terreno": {
+      "terreno": 0,
+      "superficieTotal": 120,
+      "superficieCubierta": 100
+    },
+    "tipoOperacion": "renta",
+    "precio": {
+      "monto": 20000,
+      "moneda": "MXN",
+      "incluyeIVA": true,
+      "iva": 0.16,
+      "montoTotal": 23200
+    },
+    "imagenes": [
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "12093ab098dsa"
+      },
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "aosd8123089as"
+      }
+    ],
+    "caracteristicas": {
+      "recamaras": 2,
+      "medioBanos": 0,
+      "banosCompletos": 2,
+      "estacionamientos": 1,
+      "antiguedad": "usada",
+      "antiguedadTiempo": 5,
+      "niveles": 1,
+      "amenidades": {
+        "alberca": false,
+        "jardin": false,
+        "terraza": false
+      },
+      "servicios": {
+        "agua": true,
+        "luz": true,
+        "gas": true,
+        "internet": true
+      },
+      "mascotas": false,
+      "privada": false
+    }
+  },
+  {
+    "idInmueble": "asoid19283091283",
+    "nombre": "Terreno en zona industrial",
+    "descripcion": "Amplio terreno en zona industrial con acceso a carretera",
+    "amueblado": false,
+    "direccion": {
+      "calle": "Carretera Nacional",
+      "numeroExterior": "S/N",
+      "colonia": "Industrial",
+      "ciudad": "Monterrey",
+      "estado": "Nuevo León",
+      "pais": "México",
+      "cp": "64000"
+    },
+    "tipoInmueble": "terreno",
+    "terreno": {
+      "terreno": 1000,
+      "superficieTotal": 1000,
+      "superficieCubierta": 0
+    },
+    "tipoOperacion": "venta",
+    "precio": {
+      "monto": 5000000,
+      "moneda": "MXN",
+      "incluyeIVA": false,
+      "iva": 0.16,
+      "montoTotal": 5800000
+    },
+    "imagenes": [
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "1a2b3c4d5e6f"
+      }
+    ],
+    "caracteristicas": {
+      "recamaras": 0,
+      "medioBanos": 0,
+      "banosCompletos": 0,
+      "estacionamientos": 0,
+      "antiguedad": "nueva",
+      "niveles": 0,
+      "amenidades": {
+        "alberca": false,
+        "jardin": false,
+        "terraza": false
+      },
+      "servicios": {
+        "agua": false,
+        "luz": false,
+        "gas": false,
+        "internet": false
+      },
+      "mascotas": false,
+      "privada": false
+    }
+  },
+  {
+    "idInmueble": "12837890asd0921",
+    "nombre": "Casa en la playa Esto es una prueba con titulos muy grandes y que tomen mucho espacio en pantalla ahora muchisimo mas texto puesto en pantalla a ver como se ve el texto que esta escrito aqui",
+    "descripcion": "PPI En una Torre de 279.5 m de altura, a partir del piso 22, se encuentra KOI Sky Residences, el nuevo proyecto de Internacional de Inversiones con el que culmina VAO el innovador desarrollo de usos múltiples de Valle Oriente.\n\n64 niveles.\n27 de Oficinas.\n37 de Departamentos.\n\nVistas panorámicas del Cerro de la Silla, la Sierra Madre y el Cerro de las Mitras en 218 departamentos y 18 penthouses que van desde 130 m2 a 832 m2 con bodega propia y de 2 a 3 cajones de estacionamiento.\nAcabados de lujo.\nAltura libre 3.20 m en los departamentos y penthouses.\nCada residencia está equipada con:\n\nSistema de aire acondicionado integral.\nPreparación inteligente en todos los departamentos.\nLínea de agua purificada.\nPreparación y opción para cada control eléctrico de persianas e iluminación.\nInstalación Triple Play para voz, datos y video.\nInterfón para comunicación entre departamentos.",
+    "amueblado": true,
+    "direccion": {
+      "calle": "caliza",
+      "numeroExterior": "1201",
+      "colonia": "Canterias",
+      "ciudad": "Monterrey",
+      "estado": "Nuevo Leon",
+      "pais": "Mexico",
+      "cp": "64989"
+    },
+    "tipoInmueble": "casa",
+    "terreno": {
+      "terreno": 200,
+      "superficieTotal": 300,
+      "superficieCubierta": 200
+    },
+    "tipoOperacion": "venta",
+    "precio": {
+      "monto": 1000000,
+      "moneda": "MXN",
+      "incluyeIVA": false,
+      "iva": 0.16,
+      "montoTotal": 1160000
+    },
+    "imagenes": [
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "320489a90e239032"
+      },
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "asdadsklm230983824"
+      },
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "092384a09dsma"
+      }
+    ],
+    "caracteristicas": {
+      "recamaras": 3,
+      "medioBanos": 1,
+      "banosCompletos": 2,
+      "estacionamientos": 2,
+      "antiguedad": "usada",
+      "antiguedadTiempo": 2,
+      "niveles": 2,
+      "amenidades": [
+        {
+          "idAmenidad": "123123123",
+          "nombre": "👙 alberca"
+        },
+        {
+          "idAmenidad": "123123123",
+          "nombre": "🌲 jardin"
+        },
+        {
+          "idAmenidad": "123123123",
+          "nombre": "🏠 terraza"
+        }
+      ],
+      "servicios": [
+        {
+          "idServicio": "123123123",
+          "nombre": "agua"
+        },
+        {
+          "idServicio": "123123123",
+          "nombre": "luz"
+        },
+        {
+          "idServicio": "123123123",
+          "nombre": "gas"
+        },
+        {
+          "idServicio": "123123123",
+          "nombre": "internet"
+        }
+      ],
+      "mascotas": true,
+      "privada": true
+    }
+  },
+  {
+    "idInmueble": "asd9238098123081",
+    "nombre": "Departamento en la ciudad",
+    "descripcion": "Departamento moderno con acabados de lujo",
+    "amueblado": false,
+    "direccion": {
+      "calle": "Avenida Reforma",
+      "numeroExterior": "45",
+      "colonia": "Centro",
+      "ciudad": "Ciudad de México",
+      "estado": "CDMX",
+      "pais": "México",
+      "cp": "06700"
+    },
+    "tipoInmueble": "departamento",
+    "terreno": {
+      "terreno": 0,
+      "superficieTotal": 120,
+      "superficieCubierta": 100
+    },
+    "tipoOperacion": "renta",
+    "precio": {
+      "monto": 20000,
+      "moneda": "MXN",
+      "incluyeIVA": true,
+      "iva": 0.16,
+      "montoTotal": 23200
+    },
+    "imagenes": [
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "12093ab098dsa"
+      },
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "aosd8123089as"
+      }
+    ],
+    "caracteristicas": {
+      "recamaras": 2,
+      "medioBanos": 0,
+      "banosCompletos": 2,
+      "estacionamientos": 1,
+      "antiguedad": "usada",
+      "antiguedadTiempo": 5,
+      "niveles": 1,
+      "amenidades": {
+        "alberca": false,
+        "jardin": false,
+        "terraza": false
+      },
+      "servicios": {
+        "agua": true,
+        "luz": true,
+        "gas": true,
+        "internet": true
+      },
+      "mascotas": false,
+      "privada": false
+    }
+  },
+  {
+    "idInmueble": "asoid19283091283",
+    "nombre": "Terreno en zona industrial",
+    "descripcion": "Amplio terreno en zona industrial con acceso a carretera",
+    "amueblado": false,
+    "direccion": {
+      "calle": "Carretera Nacional",
+      "numeroExterior": "S/N",
+      "colonia": "Industrial",
+      "ciudad": "Monterrey",
+      "estado": "Nuevo León",
+      "pais": "México",
+      "cp": "64000"
+    },
+    "tipoInmueble": "terreno",
+    "terreno": {
+      "terreno": 1000,
+      "superficieTotal": 1000,
+      "superficieCubierta": 0
+    },
+    "tipoOperacion": "venta",
+    "precio": {
+      "monto": 5000000,
+      "moneda": "MXN",
+      "incluyeIVA": false,
+      "iva": 0.16,
+      "montoTotal": 5800000
+    },
+    "imagenes": [
+      {
+        "urlImagen": "https://loremflickr.com/320/240",
+        "idImagen": "1a2b3c4d5e6f"
+      }
+    ],
+    "caracteristicas": {
+      "recamaras": 0,
+      "medioBanos": 0,
+      "banosCompletos": 0,
+      "estacionamientos": 0,
+      "antiguedad": "nueva",
+      "niveles": 0,
+      "amenidades": {
+        "alberca": false,
+        "jardin": false,
+        "terraza": false
+      },
+      "servicios": {
+        "agua": false,
+        "luz": false,
+        "gas": false,
+        "internet": false
+      },
+      "mascotas": false,
+      "privada": false
+    }
+  }
+]
