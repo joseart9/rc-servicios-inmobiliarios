@@ -14,6 +14,8 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { PiSmileySadBold } from "react-icons/pi";
 import { FaTimes } from "react-icons/fa";
+import { FaSortAmountDown } from "react-icons/fa";
+import { FaSortAmountUp } from "react-icons/fa";
 
 const icons = {
   recamara: LuBedDouble,
@@ -32,6 +34,8 @@ const icons = {
   arrowDown: MdOutlineKeyboardArrowDown,
   sadFace: PiSmileySadBold,
   close: FaTimes,
+  sortDown: FaSortAmountDown,
+  sortUp: FaSortAmountUp,
 };
 
 export default icons;

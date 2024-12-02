@@ -15,13 +15,6 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function AddInmuebleForm({ control, handleSubmit, watch, setValue, images, setImages }: any) {
-    // const mockImage: ImageUploadProps = {
-    //     id: "asdiojasd129a",
-    //     url: "https://via.placeholder.com/200",
-    //     pos: 1,
-    //     uploaded: true
-    // };
-
 
     const [loading, setLoading] = useState(false);
 
@@ -34,6 +27,7 @@ export default function AddInmuebleForm({ control, handleSubmit, watch, setValue
             // Actualizar los campos en react-hook-form
             setValue("imagenes", uploadedImages);
             setValue("idInmueble", uuidv4());
+            setValue("createdAt", new Date());
 
             // Llama a handleSubmit nuevamente para obtener los datos actualizados
             handleSubmit(async (finalData: any) => {

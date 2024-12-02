@@ -15,8 +15,6 @@ export default function NewInmueble() {
     const { control, handleSubmit, watch, setValue } = useForm<Inmueble>({ defaultValues });
     const [images, setImages] = useState<ImageUploadProps[]>([]);
 
-    console.log(watch("nombre"));
-
     return (
         <main className="min-h-screen flex flex-col gap-4 p-4">
 

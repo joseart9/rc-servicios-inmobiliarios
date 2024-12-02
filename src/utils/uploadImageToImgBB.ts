@@ -11,7 +11,7 @@ export interface ImageUploadProps {
 export async function uploadImagesToImgBB(
   images: ImageUploadProps[]
 ): Promise<ImageUploadProps[]> {
-  const apiKey = process.env.IMG_BB_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_IMG_BB_KEY;
 
   if (!apiKey) {
     throw new Error("API key is missing");

@@ -27,6 +27,10 @@ import MapAdressDesc from "./Map/MapAdressDesc";
 
 import { useFavs } from "@/globals/FavsProvider";
 
+
+import { useDisclosure, Modal, ModalContent } from "@nextui-org/react";
+import alert from "@/utils/Alert";
+
 // Importa el componente dinámicamente, deshabilitando SSR
 const MapComponent = dynamic(() => import('@/app/inmuebles/[inmuebleId]/components/Map/LeafletMap'), { ssr: false });
 
@@ -39,7 +43,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
     const { coordinates, loading: coordinatesLoading } = useFetchCoordinates(inmueble.direccion);
     const textRef = useRef<HTMLParagraphElement>(null);
 
-    const { favs, addFav, removeFav, clearFavs } = useFavs();
+    const { favs, addFav, removeFav } = useFavs();
 
     useEffect(() => {
         if (textRef.current) {
@@ -56,6 +60,31 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
     const handleRemoveFav = () => {
         removeFav(inmueble.idInmueble);
     };
+
+    const [imageModalOpen, setImageModalOpen] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    const openImageModal = (index: number) => {
+        setSelectedIndex(index);
+        setImageModalOpen(true);
+    };
+
+    const closeImageModal = () => {
+        setSelectedIndex(0);
+        setImageModalOpen(false);
+    };
+
+    function handleShare() {
+        const fullUrl = `${window.location.origin}${pathname}`;
+        navigator.clipboard.writeText(fullUrl)
+            .then(() => {
+                alert("Copiado al portapapeles", "success");
+            })
+            .catch((err) => {
+                console.error("Error al copiar al portapapeles: ", err);
+                alert("No se pudo copiar al portapapeles.", "error");
+            });
+    }
 
     return (
         <section className="flex flex-col w-full py-4 gap-7 container mx-auto p-2">
@@ -91,7 +120,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                         )}
 
                         <Tooltip className="text-white" content="Compartir" showArrow color="warning">
-                            <Button variant="light" isIconOnly size="md">
+                            <Button variant="light" isIconOnly size="md" onPress={handleShare}>
                                 <icons.compartir className="text-primaryLight text-2xl" />
                             </Button>
                         </Tooltip>
@@ -116,9 +145,10 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                         {inmueble.imagenes?.map((imagen, index) => (
                             <SwiperSlide key={imagen.id}>
                                 <img
-                                    className="object-cover rounded-lg w-full h-full col-span-2"
+                                    className="object-cover rounded-lg w-full h-full col-span-2 cursor-pointer"
                                     src={imagen.url}
                                     alt={`${inmueble.nombre} - ${index + 1}`}
+                                    onClick={() => openImageModal(index)}
                                 />
                             </SwiperSlide>
                         ))}
@@ -228,6 +258,43 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                     <FormComponent />
                 </section>
             </section>
+
+            {/* Modal para mostrar todas las imágenes */}
+            <Modal isOpen={imageModalOpen} hideCloseButton onClose={closeImageModal} disableAnimation size="full" className="bg-black/80">
+                <ModalContent className="relative flex items-center justify-center h-full p-0">
+                    {/* Botón de cierre */}
+                    <Button
+                        onClick={closeImageModal}
+                        className="absolute top-4 right-4 z-10 rounded-full bg-transparent text-white font-bold"
+                        isIconOnly
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </Button>
+
+                    {/* Swiper */}
+                    <Swiper
+                        modules={[Navigation]}
+                        navigation
+                        initialSlide={selectedIndex}
+                        spaceBetween={10}
+                        slidesPerView={1}
+                        className="w-full h-full"
+                        loop
+                    >
+                        {inmueble.imagenes?.map((imagen) => (
+                            <SwiperSlide key={imagen.id}>
+                                <img
+                                    src={imagen.url}
+                                    alt={imagen.id}
+                                    className="w-full h-full object-contain"
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </ModalContent>
+            </Modal>
         </section>
     );
 }

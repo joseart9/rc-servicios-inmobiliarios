@@ -25,4 +25,6 @@ export default interface Inmueble {
   imagenes?: ImageUploadProps[];
   // Características del inmueble
   caracteristicas?: Caracteristicas;
+  // Timestamps
+  createdAt?: number;
 }
