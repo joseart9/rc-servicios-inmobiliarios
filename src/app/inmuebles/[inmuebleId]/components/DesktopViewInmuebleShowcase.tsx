@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 // Custom Imports
 import Inmueble from "@/types/Inmueble";
 import BreadcrumbNavigation from "@/app/inmuebles/components/BreadcrumbNavigation";
-import InmuebleInfoShowcase from "@/app/inmuebles/[inmuebleId]/components/InmuebleInfoShowcase";
+import InmuebleInfoShowcase from "@/app/inmuebles/[inmuebleId]/components/InmuebleInfoShowcase/InmuebleInfoShowcaseComponent";
 import { useFetchCoordinates } from "@/hooks/useFetchCoordinates";
 
 import { usePathname } from "next/navigation";
@@ -16,9 +16,6 @@ import "swiper/css/navigation";
 import dynamic from 'next/dynamic';
 
 // Icons
-
-import { MdFavoriteBorder } from "react-icons/md";
-
 import icons from "@/Icons";
 
 import FormComponent from "./FormComponent";
@@ -96,10 +93,10 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                         {inmueble.nombre}
                     </h1>
                     <div className="flex flex-row gap-2 items-center">
-                        <Tooltip className="text-white" content="Contactar por Whatsapp" showArrow color="warning">
+                        <Tooltip className="text-white" content="Contactar por WhatsApp" showArrow color="warning">
                             <Button variant="light" size="md" className="bg-transparent">
-                                <icons.whatsapp className="text-primaryLight text-2xl" />
-                                <h1 className="text-lg text-primaryLight">
+                                <icons.whatsapp className="text-primary-dark/60 text-2xl" />
+                                <h1 className="text-lg text-primary-dark/60">
                                     Informes
                                 </h1>
                             </Button>
@@ -108,20 +105,20 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                         {favs.some((fav) => fav.id === inmueble.idInmueble) ? (
                             <Tooltip className="text-white" content="Agregar a Favoritos" showArrow color="warning">
                                 <Button onPress={handleRemoveFav} variant="light" isIconOnly size="md">
-                                    <icons.favoritoActivo className="text-primaryLight text-2xl" />
+                                    <icons.favoritoActivo className="text-primary-dark/60 text-2xl" />
                                 </Button>
                             </Tooltip>
                         ) : (
                             <Tooltip className="text-white" content="Agregar a Favoritos" showArrow color="warning">
                                 <Button variant="light" isIconOnly size="md" onPress={handleAddFav}>
-                                    <icons.favoritoDesactivado className="text-primaryLight text-2xl" />
+                                    <icons.favoritoDesactivado className="text-primary-dark/60 text-2xl" />
                                 </Button>
                             </Tooltip>
                         )}
 
                         <Tooltip className="text-white" content="Compartir" showArrow color="warning">
                             <Button variant="light" isIconOnly size="md" onPress={handleShare}>
-                                <icons.compartir className="text-primaryLight text-2xl" />
+                                <icons.compartir className="text-primary-dark/60 text-2xl" />
                             </Button>
                         </Tooltip>
                     </div>
@@ -132,20 +129,20 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
 
 
                 {/* Imagenes y Showcase */}
-                <section className="grid grid-cols-3 gap-2 h-full max-h-[550px]">
+                <section className="grid grid-cols-3 gap-2 h-[550px]">
                     {/* Swiper */}
                     <Swiper
                         modules={[Navigation]}
                         navigation
                         spaceBetween={10}
                         slidesPerView={1}
-                        className="w-full h-full max-h-[550px] rounded-lg object-cover col-span-2 custom-swiper"
+                        className="w-full h-[550px] rounded-lg object-cover col-span-2 custom-swiper"
                         loop
                     >
                         {inmueble.imagenes?.map((imagen, index) => (
                             <SwiperSlide key={imagen.id}>
                                 <img
-                                    className="object-cover rounded-lg w-full h-full col-span-2 cursor-pointer"
+                                    className="object-cover rounded-lg w-full h-[550px] col-span-2 cursor-pointer"
                                     src={imagen.url}
                                     alt={`${inmueble.nombre} - ${index + 1}`}
                                     onClick={() => openImageModal(index)}
@@ -162,7 +159,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                 {/* Descripcion */}
                 <section className="flex flex-col w-full h-full rounded-lg bg-white">
                     <h1 className="bg-accent p-2 text-xl rounded-t-lg text-white font-semibold">
-                        Descripcion de la propiedad
+                        Descripción de la propiedad
                     </h1>
 
                     <section className="flex flex-col p-2 text-start">
@@ -254,7 +251,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                 <MapAdressDesc inmueble={inmueble} />
 
                 <section className="grid grid-cols-3 w-full h-full gap-2">
-                    <MoreInbueblesComponent />
+                    <MoreInbueblesComponent currentInmueble={inmueble} />
                     <FormComponent />
                 </section>
             </section>
@@ -288,7 +285,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                                 <img
                                     src={imagen.url}
                                     alt={imagen.id}
-                                    className="w-full h-full object-contain"
+                                    className="w-full h-full object-contain "
                                 />
                             </SwiperSlide>
                         ))}

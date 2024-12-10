@@ -6,17 +6,24 @@ import { useState } from "react";
 import { FaDollarSign } from "react-icons/fa";
 import { LuBedDouble } from "react-icons/lu";
 
+
 import icons from "@/Icons";
 import { Button } from "@nextui-org/button";
+import SelectFilter from "./SelectFilter";
+import { Slider } from "@nextui-org/react";
+import CheckboxFilter from "./CheckboxFilter";
+import MultiSelectFilter from "./MultiSelectFilter";
 
 export interface DefaultValues {
     type: string;
-    min: number;
-    max: number;
+    min?: number;
+    max?: number;
     filterKey: string;
     label?: string;
     icon?: any;
     step?: number;
+    value?: any;
+    selectOptions?: any[];
 }
 
 export interface FilterComponentProps {
@@ -41,14 +48,94 @@ export default function FilterComponent({ filters, setFilters }: { filters: Filt
         },
         {
             type: "slider",
-            min: 0,
+            min: 1,
             max: 10,
             filterKey: "recamaras",
             label: "Recámaras",
             icon: icons.recamara,
             step: 1
-        }
+        },
+        {
+            type: "slider",
+            min: 1,
+            max: 10,
+            filterKey: "banosCompletos",
+            label: "Baños",
+            icon: icons.banosCompletos,
+            step: 1
+        },
+        {
+            type: "select",
+            filterKey: "tipoInmueble",
+            label: "Tipo de propiedad",
+            icon: icons.casa,
+            selectOptions: [
+                { value: "casa", label: "Casa" },
+                { value: "departamento", label: "Departamento" },
+                { value: "terreno", label: "Terreno" },
+                { value: "local", label: "Local" },
+                { value: "otro", label: "Otros" },
+            ]
+        },
+        {
+            type: "slider",
+            filterKey: "antiguedadTiempo",
+            label: "Antigüedad",
+            min: 0,
+            max: 10,
+            step: 1,
+            icon: icons.antiguedad,
+        },
+        {
+            type: "slider",
+            filterKey: "estacionamientos",
+            label: "Estacionamientos",
+            min: 1,
+            max: 10,
+            step: 1,
+            icon: icons.estacionamientos,
+        },
+        {
+            type: "checkbox",
+            filterKey: "privada",
+            label: "Colonia Privada",
+            value: false,
+            icon: icons.casa,
+        },
+        {
+            type: "checkbox",
+            filterKey: "amueblado",
+            label: "Amueblado",
+            value: false,
+            icon: icons.casa,
+        },
+        {
+            type: "multiSelect",
+            filterKey: "servicios",
+            label: "Servicios",
+            selectOptions: [
+                { label: "Agua", value: "Agua" },
+                { label: "Luz", value: "Luz" },
+                { label: "Gas", value: "Gas" },
+                { label: "Internet", value: "Internet" },
+            ],
+            icon: icons.casa,
+        },
+        {
+            type: "multiSelect",
+            filterKey: "amenidades",
+            label: "Amenidades",
+            selectOptions: [
+                { label: "Alberca", value: "Alberca" },
+                { label: "Jardín", value: "Jardín" },
+                { label: "Estacionamiento", value: "Estacionamiento" },
+                { label: "Gimnasio", value: "Gimnasio" },
+            ],
+            icon: icons.casa,
+        },
+
     ];
+
 
     const handleSetFilters = () => {
         setFilters((prevFilters: FilterComponentProps[]) => {
@@ -71,32 +158,99 @@ export default function FilterComponent({ filters, setFilters }: { filters: Filt
     };
 
     return (
-        <div className="w-full h-fit bg-white rounded-lg overflow-y-auto">
+        <div className="w-full bg-white rounded-lg h-[550px] flex flex-col">
+            {/* Header fijo */}
             <h3 className="text-white bg-primary-dark px-4 p-1 font-semibold text-lg rounded-t-lg">
                 Filtros
             </h3>
-            <div className="flex flex-col h-full justify-between">
+
+            {/* Contenedor scrollable */}
+            <div className="flex-1 overflow-y-auto overflow-x-hidden">
                 <section className="flex flex-col p-3">
-                    <SliderFilter defaultValues={defaultValues.find(dv => dv.filterKey === "monto")!} setFilters={setMockFilters} filters={filters} setFiltersDelete={setFilters} />
+                    <SliderFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "monto")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
                     <div className="divider" />
-                    <SliderFilter defaultValues={defaultValues.find(dv => dv.filterKey === "recamaras")!} setFilters={setMockFilters} filters={filters} setFiltersDelete={setFilters} />
+                    <SliderFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "recamaras")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <SliderFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "banosCompletos")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <SliderFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "estacionamientos")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <SelectFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "tipoInmueble")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <SliderFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "antiguedadTiempo")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <CheckboxFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "privada")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <CheckboxFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "amueblado")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <MultiSelectFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "amenidades")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
+                    <div className="divider" />
+                    <MultiSelectFilter
+                        defaultValues={defaultValues.find((dv) => dv.filterKey === "servicios")!}
+                        setFilters={setMockFilters}
+                        filters={filters}
+                        setFiltersDelete={setFilters}
+                    />
                 </section>
-                <div className="flex w-full items-center justify-center py-4">
-                    {mockFilters.length > 0 && (
-                        <Button onPress={handleSetFilters} color="warning" className="text-white font-semibold">
-                            Filtrar
-                        </Button>
-                    )}
-                </div>
+            </div>
+
+            {/* Botón fijo */}
+            <div className="relative flex w-full items-center justify-center py-4">
+                {mockFilters.length > 0 ? (
+                    <Button onPress={handleSetFilters} color="warning" className="text-white font-semibold">
+                        Aplicar
+                    </Button>
+                ) : (
+                    <Button color="warning" isDisabled className="text-white font-semibold opacity-30">
+                        Aplicar
+                    </Button>
+                )}
             </div>
         </div>
     )
 }
-
-
-// const filters = [
-//     { key: "precio", label: "Precio", defaultValue: [1, 30000000], type: "range" },
-//     { key: "tipoPropiedad", label: "Casas", defaultValue: "casa", type: "property" },
-//     { key: "tipoPropiedad", label: "Departamentos", defaultValue: "departamento", type: "property" },
-//     { key: "tipoPropiedad", label: "Otros", defaultValue: "otro", type: "property" },
-// ];

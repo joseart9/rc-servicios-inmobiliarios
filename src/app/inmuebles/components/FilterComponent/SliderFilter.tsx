@@ -5,7 +5,7 @@ import { DefaultValues, FilterComponentProps } from "./FilterComponent";
 import icons from "@/Icons";
 
 export default function SliderFilter({ defaultValues, setFilters, filters, setFiltersDelete }: { defaultValues: DefaultValues, setFilters: any, filters?: FilterComponentProps[], setFiltersDelete: any }) {
-    const [value, setValue] = useState<SliderValue>([defaultValues.min, defaultValues.max]);
+    const [value, setValue] = useState<SliderValue>([defaultValues.min ?? 0, defaultValues.max ?? 100]);
 
     const handleSliderChange = (newValue: SliderValue) => {
         setValue(newValue);
@@ -25,7 +25,7 @@ export default function SliderFilter({ defaultValues, setFilters, filters, setFi
         );
 
         // Reset slider value
-        setValue([defaultValues.min, defaultValues.max]);
+        setValue([defaultValues.min ?? 0, defaultValues.max ?? 100]);
     };
 
     return (

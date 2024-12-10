@@ -19,7 +19,7 @@ export default function InmuebleCard({ inmueble }: { inmueble: Inmueble }) {
     if (!inmueble) return null;
 
     return (
-        <Card className="w-auto h-[550px] max-w-[400px] min-w-[300px] relative group shadow-md">
+        <Card radius="sm" className="w-auto h-[550px] max-w-[400px] min-w-[300px] relative group shadow-md">
             {/* Fondo negro transparente y texto */}
             <div onClick={handleCardClick} className="cursor-pointer absolute inset-0 animate-duration-[1000ms] bg-black/60 opacity-0 animate-ease-in-out group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
                 <span className="text-white text-lg font-semibold uppercase animate-ease-in-out group-hover:animate-fade-up">
