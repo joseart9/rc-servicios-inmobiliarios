@@ -10,18 +10,23 @@ import InmuebleCardMinal from "@/app/components/InmuebleCardMinimal";
 import { useMemo } from "react";
 import { orderByField } from "@/server/actions/inmuebles";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
 export default function Home() {
-    const orderByData: orderByField = useMemo(() => ({ field: "createdAt", direction: "asc" }), []);
+    const orderByData: orderByField = useMemo(() => ({ field: "createdAt", direction: "desc" }), []);
 
     const { inmuebles, loading } = useInmuebles({ orderByData });
 
-    console.log(inmuebles);
+    const inmueblesToShow = inmuebles?.slice(0, 10);
 
     return (
         <InmueblesNavbar>
             <div>
                 <HeroSection />
-                <div className="container mx-auto py-16">
+                <div className="container mx-auto py-16 px-2">
                     <motion.h2
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +43,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="flex w-screen container mx-auto px-24 bg-primary-light/10 rounded-3xl"
+                    className="flex w-screen container mx-auto px-24 bg-primary/5 rounded-3xl"
                 >
                     <p className="text-primary-dark text-pretty text-center font-semibold tracking-wider italic text-3xl py-8">
                         " Transformamos espacios en sueños; confía en expertos para
@@ -46,24 +51,42 @@ export default function Home() {
                     </p>
                 </motion.div>
                 <div className="flex w-full py-8" />
-                <div className="grid grid-cols-3 w-full container mx-auto">
+                <div className="grid grid-cols-3 w-full container mx-auto px-2">
                     <div className="col-span-2">
                         <h3 className="text-xl font-semibold uppercase text-accent pt-4 pb-4">
-                            Recien Agregados
+                            Recién Agregados
                         </h3>
                         {loading ? (
                             <div className="flex justify-center items-center w-full h-96">
                                 <Spinner color="warning" size="lg" />
                             </div>
                         ) : (
-                            <div className="flex flex-row gap-2 overflow-x-auto w-full">
-                                {inmuebles?.map((inmueble) => (
-                                    <InmuebleCardMinal
-                                        key={inmueble.idInmueble}
-                                        inmueble={inmueble}
-                                    />
-                                ))}
-                            </div>
+                            <Swiper
+                                slidesPerView={3}
+                                spaceBetween={0}
+                                pagination={{
+                                    clickable: true,
+                                    dynamicBullets: true,
+                                }}
+                                modules={[Pagination, Autoplay]}
+                                className="w-full h-[380px] rounded-lg object-cover col-span-2 custom-swiper"
+                                loop
+                                autoplay={{
+                                    delay: 2000, // Deslizamiento automático cada 3 segundos
+                                    disableOnInteraction: false, // No detener el autoplay al interactuar
+                                }}
+                            >
+                                <div className="flex flex-row gap-2 overflow-x-auto w-full">
+                                    {inmueblesToShow?.map((inmueble) => (
+                                        <SwiperSlide key={inmueble.idInmueble}>
+                                            <InmuebleCardMinal
+                                                key={inmueble.idInmueble}
+                                                inmueble={inmueble}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </div>
+                            </Swiper>
                         )}
                     </div>
                     <motion.div
@@ -71,12 +94,12 @@ export default function Home() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
-                        className="pt-4 col-span-1 text-center shadow-sm rounded-lg w-full border-4 border-primary-dark/30"
+                        className="pt-4 col-span-1 text-center shadow-sm rounded-lg w-full border-1 border-primary-dark/30"
                     >
                         <h3 className="text-xl text-primary-dark font-semibold pb-8 uppercase">
                             Contáctanos
                         </h3>
-                        <form className="flex flex-col gap-3 items-end w-full p-2">
+                        <form className="flex flex-col gap-3 items-end w-full p-4">
                             <Input
                                 type="text"
                                 placeholder="Nombre"

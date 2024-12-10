@@ -1,7 +1,7 @@
 export default function FooterComponent() {
     return (
         <>
-            <footer className="footer h-fit bg-neutral text-base-content p-10">
+            <footer className="footer h-fit bg-primary/5 p-10">
                 <nav>
                     <h6 className="footer-title">Services</h6>
                     <a className="link link-hover">Branding</a>

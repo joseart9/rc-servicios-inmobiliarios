@@ -146,8 +146,6 @@ export async function getInmueblesFiltered(
       return data;
     }) as unknown as Inmueble[];
 
-    console.log("INMUEBLESSSSSSSSS", inmuebles);
-
     return inmuebles;
   } catch (error) {
     console.error("Error al obtener los inmuebles: ", error);

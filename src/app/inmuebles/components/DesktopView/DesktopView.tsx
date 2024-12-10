@@ -46,7 +46,7 @@ export default function DesktopViewComponent({ type }: { type: string }) {
         }
     }, [orderBy, selectedValue]);
 
-    const { inmuebles, loading, error } = useInmuebles({ filter: type, subFilter: filters, orderByData: orderByFilter });
+    const { inmuebles, loading, error } = useInmuebles({ filter: type, subFilter: filters });
 
     function handleOrdenar() {
         setOrderBy(orderBy === "asc" ? "desc" : "asc");
@@ -92,11 +92,11 @@ export default function DesktopViewComponent({ type }: { type: string }) {
                 <div className="flex fles-row justify-between px-2">
                     <BreadcrumbNavigation pathname={pathname} />
                     {inmuebles && inmuebles.length > 0 ? (
-                        <p className="text-sm text-primaryLight">
+                        <p className="text-sm text-primary-dark/80">
                             Se encontraron {inmuebles.length} resultados
                         </p>
                     ) : (
-                        <p className="text-sm text-primaryLight">
+                        <p className="text-sm text-primary-dark/80">
                             No se encontraron resultados
                         </p>
                     )}
@@ -196,7 +196,9 @@ export default function DesktopViewComponent({ type }: { type: string }) {
             <section className="grid grid-cols-12 gap-2 h-full w-full">
                 {/* Filter Section */}
                 <section className="lg:col-span-3 xl:col-span-2">
-                    <FilterComponent filters={filters} setFilters={setFilters} />
+                    <div className="sticky top-4">
+                        <FilterComponent filters={filters} setFilters={setFilters} />
+                    </div>
                 </section>
 
                 {/* Inmuebles Section */}

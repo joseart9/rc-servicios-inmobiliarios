@@ -11,7 +11,7 @@ const BreadcrumbNavigation = ({ pathname }: { pathname: string }) => {
     return (
         <Breadcrumbs>
             <BreadcrumbItem href="/">
-                <p className='text-primaryLight'>
+                <p className='text-primary-dark/80'>
                     Inicio
                 </p>
             </BreadcrumbItem>
@@ -21,7 +21,7 @@ const BreadcrumbNavigation = ({ pathname }: { pathname: string }) => {
                     className="capitalize"
                     href={breadcrumb.href}
                 >
-                    <p className='text-primaryLight'>
+                    <p className='text-primary-dark/80'>
                         {breadcrumb.label}
                     </p>
 

@@ -4,10 +4,12 @@ import { Card, CardBody, Image } from "@nextui-org/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import servicios from "./Servicios";
 
 export default function ServiciosComponent() {
 
@@ -41,50 +43,18 @@ export default function ServiciosComponent() {
         }),
     };
 
-    const servicios = [
-        {
-            title: "Servicio 1",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
-            img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
-            href: "/",
-        },
-        {
-            title: "Servicio 2",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
-            img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
-            href: "/",
-        },
-        {
-            title: "Servicio 3",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
-            img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
-            href: "/",
-        },
-        {
-            title: "Servicio 4",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
-            img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
-            href: "/",
-        },
-        {
-            title: "Servicio 5",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
-            img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
-            href: "/",
-        },
-        {
-            title: "Servicio 6",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
-            img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
-            href: "/",
-        },
-    ];
+
 
     return (
         <div id="servicios-section" className="container mx-auto">
             <Swiper
                 spaceBetween={1}
                 slidesPerView={1}
+                modules={[Pagination, Autoplay]}
+                pagination={{
+                    clickable: true,
+                    dynamicBullets: true,
+                }}
                 breakpoints={{
                     768: {
                         slidesPerView: 2,
@@ -101,10 +71,10 @@ export default function ServiciosComponent() {
 
                 }}
                 loop
-                className="w-full custom-swiper"
+                className="w-full custom-swiper pb-12"
                 autoplay={{
-                    delay: 500,
-                    disableOnInteraction: true,
+                    delay: 3000, // Deslizamiento automático cada 3 segundos
+                    disableOnInteraction: true, // No detener el autoplay al interactuar
                 }}
             >
                 {servicios.map((servicio, index) => (

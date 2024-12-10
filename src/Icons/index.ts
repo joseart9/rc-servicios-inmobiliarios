@@ -8,7 +8,7 @@ import { BiSortAlt2 } from "react-icons/bi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { IoShareSocial } from "react-icons/io5";
 import { FaWhatsapp } from "react-icons/fa";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavoriteBorder, MdOutlineBathroom } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -16,6 +16,8 @@ import { PiSmileySadBold } from "react-icons/pi";
 import { FaTimes } from "react-icons/fa";
 import { FaSortAmountDown } from "react-icons/fa";
 import { FaSortAmountUp } from "react-icons/fa";
+import { RiCarLine } from "react-icons/ri";
+import { FaRegHourglass } from "react-icons/fa";
 
 const icons = {
   recamara: LuBedDouble,
@@ -36,6 +38,9 @@ const icons = {
   close: FaTimes,
   sortDown: FaSortAmountDown,
   sortUp: FaSortAmountUp,
+  banosCompletos: MdOutlineBathroom,
+  estacionamientos: RiCarLine,
+  antiguedad: FaRegHourglass,
 };
 
 export default icons;

@@ -1,7 +1,7 @@
 // Custom Imports
 import Inmueble from "@/types/Inmueble";
 
-import { Card, CardBody, CardFooter, CardHeader, Chip, Image, Skeleton } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import InmuebleImage from "@/app/inmuebles/components/InmuebleCard/InmuebleImagen";
 
@@ -16,7 +16,7 @@ export default function InmuebleCardMinimal({ inmueble }: { inmueble: Inmueble }
     if (!inmueble) return null;
 
     return (
-        <Card className=" h-[330px] w-[250px] relative group shadow-md">
+        <Card className=" h-[330px] w-[250px] relative group shadow-md" radius="sm">
             {/* Fondo negro transparente y texto */}
             <div onClick={handleCardClick} className="cursor-pointer absolute inset-0 animate-duration-[1000ms] bg-black/60 opacity-0 animate-ease-in-out group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
                 <span className="text-white text-md font-semibold uppercase animate-ease-in-out group-hover:animate-fade-up">
