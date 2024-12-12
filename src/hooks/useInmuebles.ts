@@ -74,7 +74,7 @@ export default function useInmuebles({
     createdAt: "createdAt",
   };
 
-  console.log("Memoized subfilter", memoizedSubFilter);
+  console.log("Memoized orderByData", memoizedOrderByData);
 
   useEffect(() => {
     const fetchInmuebles = async () => {
@@ -144,12 +144,17 @@ export default function useInmuebles({
     if (memoizedOrderByData) {
       const { field, direction } = memoizedOrderByData;
 
-      // Usa fieldPathMapping para obtener el campo correcto
       const fieldPath = fieldPathMapping[field];
       if (fieldPath) {
         filtered.sort((a, b) => {
-          const aValue = getFieldValue(a, fieldPath);
-          const bValue = getFieldValue(b, fieldPath);
+          let aValue = getFieldValue(a, fieldPath);
+          let bValue = getFieldValue(b, fieldPath);
+
+          // Si el campo es "createdAt", conviértelo a Date
+          if (field === "createdAt") {
+            aValue = new Date(aValue);
+            bValue = new Date(bValue);
+          }
 
           if (direction === "desc") return aValue > bValue ? -1 : 1;
           return aValue < bValue ? -1 : 1;

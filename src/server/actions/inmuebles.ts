@@ -10,6 +10,7 @@ import {
   Query,
   orderBy,
   Timestamp,
+  updateDoc,
 } from "firebase/firestore";
 import db from "@/db";
 import Inmueble from "@/types/Inmueble";
@@ -59,9 +60,7 @@ export interface orderByField {
 }
 
 export async function getInmueblesFiltered(
-  filtro?: string,
-  subFiltro?: FilterComponentProps[],
-  orderByData?: orderByField
+  filtro?: string
 ): Promise<Inmueble[]> {
   try {
     const inmueblesCollection = collection(firestore, "inmuebles");
@@ -74,75 +73,11 @@ export async function getInmueblesFiltered(
       q = query(q, where("tipoOperacion", "==", filtro));
     }
 
-    // Mapping of filterKey to Firestore field paths
-    const fieldPathMapping: { [key: string]: string } = {
-      // Precio fields
-      monto: "precio.monto",
-      moneda: "precio.moneda",
-      incluyeIVA: "precio.incluyeIVA",
-      iva: "precio.iva",
-      montoTotal: "precio.montoTotal",
-      // Caracteristicas fields
-      recamaras: "caracteristicas.recamaras",
-      medioBanos: "caracteristicas.medioBanos",
-      banosCompletos: "caracteristicas.banosCompletos",
-      estacionamientos: "caracteristicas.estacionamientos",
-      antiguedad: "caracteristicas.antiguedad",
-      antiguedadTiempo: "caracteristicas.antiguedadTiempo",
-      niveles: "caracteristicas.niveles",
-      mascotas: "caracteristicas.mascotas",
-      privada: "caracteristicas.privada",
-      // Terreno fields
-      terreno: "terreno.terreno",
-      superficieTotal: "terreno.superficieTotal",
-      superficieCubierta: "terreno.superficieCubierta",
-      // Dirección fields
-      calle: "direccion.calle",
-      numeroExterior: "direccion.numeroExterior",
-      colonia: "direccion.colonia",
-      ciudad: "direccion.ciudad",
-      estado: "direccion.estado",
-      pais: "direccion.pais",
-      cp: "direccion.cp",
-      // Top-level fields
-      idInmueble: "idInmueble",
-      nombre: "nombre",
-      descripcion: "descripcion",
-      amueblado: "amueblado",
-      tipoInmueble: "tipoInmueble",
-      // Timestamps
-      createdAt: "createdAt",
-    };
-
-    if (subFiltro) {
-      for (const filter of subFiltro) {
-        const { filterKey, value, type } = filter;
-
-        const fieldPath = fieldPathMapping[filterKey!];
-        if (!fieldPath) continue;
-
-        if (type === "slider" && Array.isArray(value)) {
-          const [minValue, maxValue] = value;
-          q = query(q, where(fieldPath, ">=", minValue));
-          q = query(q, where(fieldPath, "<=", maxValue));
-        } else if (type === "select" || type === "checkbox") {
-          q = query(q, where(fieldPath, "==", value));
-        }
-      }
-    }
-
-    if (orderByData?.field) {
-      const fieldPath = fieldPathMapping[orderByData.field];
-      if (fieldPath) {
-        q = query(q, orderBy(fieldPath, orderByData?.direction));
-      }
-    }
-
     const querySnapshot = await getDocs(q);
 
     const inmuebles: Inmueble[] = querySnapshot.docs.map((doc) => {
       const data = JSON.parse(JSON.stringify(doc.data())); // Asegúrate de que no hay referencias al objeto original
-      delete data.createdAt; // Remueve el campo "createdAt"
+      // delete data.createdAt; // Remueve el campo "createdAt"
       return data;
     }) as unknown as Inmueble[];
 
@@ -157,30 +92,61 @@ export async function getInmueble(
   idInmueble: string
 ): Promise<Inmueble | null> {
   try {
-    // Referencia a la colección "inmuebles"
     const inmueblesCollection = collection(firestore, "inmuebles");
 
-    // Crear una consulta para buscar el inmueble con el campo "idInmueble" igual al proporcionado
     const q = query(inmueblesCollection, where("idInmueble", "==", idInmueble));
 
-    // Ejecutar la consulta
     const querySnapshot = await getDocs(q);
 
-    // Si no se encuentra ningún documento, devolver null
     if (querySnapshot.empty) {
       return null;
     }
 
-    // Devolver los datos del primer documento encontrado
     const data = querySnapshot.docs[0].data();
-    const { createdAt, ...filteredData } = data;
+
+    // Verifica si createdAt es un Timestamp y conviértelo si es necesario
+    const createdAt =
+      data.createdAt instanceof Timestamp
+        ? data.createdAt.toDate().toISOString()
+        : data.createdAt;
+
     return {
-      ...filteredData,
-      createdAt: createdAt?.toDate().toISOString() || null,
+      ...data,
+      createdAt: createdAt || null,
     } as Inmueble;
-    // return querySnapshot.docs[0].data() as Inmueble;
   } catch (error) {
     console.error("Error al obtener el inmueble: ", error);
     throw new Error("No se pudo obtener el inmueble");
+  }
+}
+
+export async function updateInmueble(inmueble: Inmueble): Promise<void> {
+  try {
+    const inmueblesCollection = collection(firestore, "inmuebles");
+
+    console.log("Actualizando inmueble con ID: ", inmueble.idInmueble);
+
+    // Buscar el documento con el idInmueble proporcionado
+    const q = query(
+      inmueblesCollection,
+      where("idInmueble", "==", inmueble.idInmueble)
+    );
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      throw new Error("No se encontró el inmueble con el id proporcionado.");
+    }
+
+    // Obtener la referencia del documento a actualizar
+    const docRef = querySnapshot.docs[0].ref;
+
+    // Actualizar el documento con los nuevos datos
+    const inmuebleData = JSON.parse(JSON.stringify(inmueble));
+    await updateDoc(docRef, inmuebleData);
+
+    console.log("Inmueble actualizado correctamente.");
+  } catch (error) {
+    console.error("Error al actualizar el inmueble: ", error);
+    throw new Error("No se pudo actualizar el inmueble.");
   }
 }

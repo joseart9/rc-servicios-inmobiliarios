@@ -8,15 +8,13 @@ import PrecioForm from "./PrecioForm";
 import CaracteristicasForm from "./CaracteristicasForm";
 import ImageUpload from "@/app/admin/components/ImageUpload";
 import { uploadImagesToImgBB } from "@/utils/uploadImageToImgBB";
-import { addInmueble } from "@/server/actions/inmuebles";
+import { updateInmueble } from "@/server/actions/inmuebles";
 
 import { Button } from "@nextui-org/react";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-
 import alert from "@/utils/Alert";
 
-export default function AddInmuebleForm({ control, handleSubmit, watch, setValue, images, setImages }: any) {
+export default function EditInmuebleForm({ control, handleSubmit, watch, setValue, images, setImages, inmueble }: any) {
 
     const [loading, setLoading] = useState(false);
 
@@ -28,15 +26,14 @@ export default function AddInmuebleForm({ control, handleSubmit, watch, setValue
 
             // Actualizar los campos en react-hook-form
             setValue("imagenes", uploadedImages);
-            setValue("idInmueble", uuidv4());
-            setValue("createdAt", new Date());
+            setValue("createdAt", inmueble.createdAt);
+            setValue("updatedAt", new Date());
 
             // Llama a handleSubmit nuevamente para obtener los datos actualizados
             handleSubmit(async (finalData: any) => {
                 try {
-                    await addInmueble(finalData);
-                    // console.log("Inmueble guardado exitosamente:", finalData);
-                    alert("Inmueble Creado exitosamente", "success");
+                    await updateInmueble(finalData);
+                    alert("Inmueble guardado exitosamente", "success");
                 } catch (error) {
                     // console.error("Error al guardar el inmueble:", error);
                     alert("Ocurrió un error al guardar el inmueble, contacte a un administrador", "error");
@@ -66,7 +63,7 @@ export default function AddInmuebleForm({ control, handleSubmit, watch, setValue
             </div>
             <div className="flex w-full justify-end">
                 <Button isLoading={loading} type="submit" className="text-white w-fit" variant="solid" color="warning">
-                    Guardar
+                    Aceptar
                 </Button>
             </div>
         </form>

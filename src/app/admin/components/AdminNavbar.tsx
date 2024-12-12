@@ -38,8 +38,8 @@ export default function AdminNavbar({ children }: { children?: ReactNode }) {
 
     return (
         <section className="flex flex-col min-h-screen">
-            <Navbar className="h-fit" isBlurred shouldHideOnScroll classNames={{
-                base: "bg-neutral/60", // Adjust the color and opacity as needed
+            <Navbar position="static" className="h-fit" classNames={{
+                base: "bg-primary/5", // Adjust the color and opacity as needed
             }}>
                 <NavbarContent className="sm:hidden" justify="start">
                     <NavbarMenuToggle />

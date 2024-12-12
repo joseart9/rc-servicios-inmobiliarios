@@ -9,7 +9,7 @@ import { useFetchCoordinates } from "@/hooks/useFetchCoordinates";
 
 import { usePathname } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Keyboard } from "swiper/modules";
 import { Button, Spinner, Chip, Tooltip, Image, Skeleton } from "@nextui-org/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -39,6 +39,8 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
     const [isOverflowing, setIsOverflowing] = useState(false);
     const { coordinates, loading: coordinatesLoading } = useFetchCoordinates(inmueble.direccion);
     const textRef = useRef<HTMLParagraphElement>(null);
+
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     const { favs, addFav, removeFav } = useFavs();
 
@@ -132,11 +134,16 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                 <section className="grid grid-cols-3 gap-2 h-[550px]">
                     {/* Swiper */}
                     <Swiper
-                        modules={[Navigation]}
+                        modules={[Navigation, Keyboard]}
                         navigation
+                        keyboard={{
+                            enabled: true,
+                            onlyInViewport: true
+                        }}
+                        thumbs={{ swiper: thumbsSwiper }}
                         spaceBetween={10}
                         slidesPerView={1}
-                        className="w-full h-[550px] rounded-lg object-cover col-span-2 custom-swiper"
+                        className="w-full h-[550px] rounded-lg object-cover col-span-2 custom-swiper mySwiper2"
                         loop
                     >
                         {inmueble.imagenes?.map((imagen, index) => (
@@ -257,7 +264,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
             </section>
 
             {/* Modal para mostrar todas las imágenes */}
-            <Modal isOpen={imageModalOpen} hideCloseButton onClose={closeImageModal} disableAnimation size="full" className="bg-black/80">
+            <Modal shouldBlockScroll isKeyboardDismissDisabled={false} isOpen={imageModalOpen} hideCloseButton onClose={closeImageModal} size="full" className="bg-black/80">
                 <ModalContent className="relative flex items-center justify-center h-full p-0">
                     {/* Botón de cierre */}
                     <Button
@@ -272,7 +279,11 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
 
                     {/* Swiper */}
                     <Swiper
-                        modules={[Navigation]}
+                        modules={[Navigation, Keyboard]}
+                        keyboard={{
+                            enabled: true,
+                            onlyInViewport: false
+                        }}
                         navigation
                         initialSlide={selectedIndex}
                         spaceBetween={10}

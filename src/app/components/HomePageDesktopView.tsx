@@ -17,11 +17,13 @@ import "swiper/css/pagination";
 import ContactComponent from "@/app/components/ContactComponent";
 
 export default function Home() {
-    const orderByData: orderByField = useMemo(() => ({ field: "createdAt", direction: "desc" }), []);
+    const orderByData: orderByField = useMemo(() => ({ field: "createdAt", direction: "asc" }), []);
 
-    const { inmuebles, loading } = useInmuebles({ orderByData });
+    const { inmuebles, loading } = useInmuebles({ orderByData: orderByData });
 
     const inmueblesToShow = inmuebles?.slice(0, 10);
+
+    console.log(inmueblesToShow)
 
     const scrollToServicios = () => {
         const formElement = document.getElementById("servicios");
@@ -33,8 +35,6 @@ export default function Home() {
     return (
         <InmueblesNavbar>
             <div>
-
-
                 <HeroSection hrefJump={scrollToServicios} />
 
                 <div className="flex w-full py-8" />

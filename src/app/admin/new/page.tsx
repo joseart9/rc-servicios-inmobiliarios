@@ -32,7 +32,7 @@ export default function NewInmueble() {
                     <div className="flex flex-row items-center justify-between bg-accent text-white p-2 px-4 rounded-t-lg">
                         <h3 className="text-xl font-semibold">Vista Previa</h3>
                         <Tooltip className="text-white" content="La primera imagen es la que se mostrara en la tarjeta." showArrow color="warning">
-                            <IoIosInformationCircleOutline className="text-2xl text-white/50" />
+                            <IoIosInformationCircleOutline className="text-2xl text-white" />
                         </Tooltip>
                     </div>
 
