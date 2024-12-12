@@ -1,29 +1,14 @@
-import { Input, Textarea, Button } from "@nextui-org/react";
-import Inmueble from "@/types/Inmueble";
-import { useState } from "react";
+import { Input, Button, Textarea } from '@nextui-org/react'
 
-export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
-
-    const [formValues, setFormValues] = useState({
-        nombre: '',
-        correo: '',
-        telefono: '',
-        mensaje: `Estoy interesado en obtener más información sobre el inmueble:\n\n${inmueble.nombre}`
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormValues({
-            ...formValues,
-            [e.target.name]: e.target.value
-        });
-    }
-
+export default function ContactComponent({ bordered, title, defaultMsg, size }: { bordered?: boolean, title?: string, defaultMsg?: string, size?: 'sm' | 'md' | 'lg' }) {
     return (
         <div
-            className="pt-4 col-span-1 text-center shadow-sm rounded-lg w-full border-1 border-primary-dark/30"
+            className={`pt-4 col-span-1 text-center shadow-sm rounded-lg
+                ${bordered ? `border-1 border-primary-dark/30` : ``} 
+                w-full`}
         >
             <h3 className="text-xl text-primary-dark font-semibold pb-8 uppercase">
-                Contacto
+                {title || ""}
             </h3>
             <form className="flex flex-col gap-3 items-end w-full p-4">
                 <Input
@@ -31,49 +16,41 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
                     label="Nombre"
                     variant="underlined"
                     color="warning"
-                    name="nombre"
-                    className="text-primary-dark/60"
+                    size={size}
                     isRequired
                     required
-                    value={formValues.nombre}
-                    onChange={(e) => handleChange(e)}
+                    className='text-primary-dark/60'
                 />
                 <Input
                     type="email"
                     label="Correo"
                     variant="underlined"
                     color="warning"
-                    name="correo"
-                    className="text-primary-dark/60"
+                    size={size}
                     isRequired
                     required
-                    value={formValues.correo}
-                    onChange={(e) => handleChange(e)}
+                    className='text-primary-dark/60'
                 />
                 <Input
                     type="tel"
                     label="Teléfono"
                     variant="underlined"
                     color="warning"
-                    name="telefono"
-                    className="text-primary-dark/60"
+                    size={size}
                     isRequired
                     required
-                    value={formValues.telefono}
-                    onChange={(e) => handleChange(e)}
+                    className='text-primary-dark/60'
                 />
                 <Textarea
                     type="text"
                     label="Mensaje"
                     variant="underlined"
                     color="warning"
-                    name="mensaje"
-                    className="text-primary-dark/60"
+                    size={size}
                     isRequired
                     required
-                    value={formValues.mensaje}
-                    onChange={(e) => handleChange(e)}
-
+                    value={defaultMsg}
+                    className='text-primary-dark/60'
                 />
                 <div className="pt-4">
                     <Button
@@ -81,7 +58,7 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
                         className="text-white"
                         variant="solid"
                         color="warning"
-                        size="md"
+                        size={size}
                     >
                         Enviar
                     </Button>

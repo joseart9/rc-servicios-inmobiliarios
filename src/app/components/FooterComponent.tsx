@@ -3,24 +3,20 @@ export default function FooterComponent() {
         <>
             <footer className="footer h-fit bg-primary/5 p-10">
                 <nav>
-                    <h6 className="footer-title">Services</h6>
-                    <a className="link link-hover">Branding</a>
-                    <a className="link link-hover">Design</a>
-                    <a className="link link-hover">Marketing</a>
-                    <a className="link link-hover">Advertisement</a>
+                    <h6 className="footer-title">¿Qué estás buscando?</h6>
+                    <a className="link link-hover" href="/inmuebles/venta">Comprar Inmueble</a>
+                    <a className="link link-hover" href="/inmuebles/renta">Rentar Inmueble</a>
                 </nav>
                 <nav>
-                    <h6 className="footer-title">Company</h6>
-                    <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Contact</a>
-                    <a className="link link-hover">Jobs</a>
-                    <a className="link link-hover">Press kit</a>
+                    <h6 className="footer-title">Servicios</h6>
+                    <a className="link link-hover" href="/valuacion">Valuación</a>
+                    <a className="link link-hover" href="/poliza">Pólizas Jurídicas</a>
+                    <a className="link link-hover" href="/credito">Crédito</a>
                 </nav>
                 <nav>
-                    <h6 className="footer-title">Legal</h6>
-                    <a className="link link-hover">Terms of use</a>
-                    <a className="link link-hover">Privacy policy</a>
-                    <a className="link link-hover">Cookie policy</a>
+                    <h6 className="footer-title">Empresa</h6>
+                    <a className="link link-hover" href="/nosotros">Nosotros</a>
+                    <a className="link link-hover" href="/tya">Términos y Condiciones</a>
                 </nav>
             </footer>
             <footer className="footer bg-accent text-white border-accent border-t px-10 py-4">

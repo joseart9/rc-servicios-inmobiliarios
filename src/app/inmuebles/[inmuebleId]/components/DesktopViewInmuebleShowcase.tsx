@@ -157,7 +157,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
 
 
                 {/* Descripcion */}
-                <section className="flex flex-col w-full h-full rounded-lg bg-white">
+                <section className="flex flex-col w-full h-full min-h-[400px] rounded-lg bg-white">
                     <h1 className="bg-accent p-2 text-xl rounded-t-lg text-white font-semibold">
                         Descripción de la propiedad
                     </h1>
@@ -252,7 +252,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
 
                 <section className="grid grid-cols-3 w-full h-full gap-2">
                     <MoreInbueblesComponent currentInmueble={inmueble} />
-                    <FormComponent />
+                    <FormComponent inmueble={inmueble} />
                 </section>
             </section>
 

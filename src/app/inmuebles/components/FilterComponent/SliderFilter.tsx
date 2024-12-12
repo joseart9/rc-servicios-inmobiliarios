@@ -1,11 +1,22 @@
 import { Slider, SliderValue, Button } from "@nextui-org/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DefaultValues, FilterComponentProps } from "./FilterComponent";
 
 import icons from "@/Icons";
 
 export default function SliderFilter({ defaultValues, setFilters, filters, setFiltersDelete }: { defaultValues: DefaultValues, setFilters: any, filters?: FilterComponentProps[], setFiltersDelete: any }) {
-    const [value, setValue] = useState<SliderValue>([defaultValues.min ?? 0, defaultValues.max ?? 100]);
+    const [value, setValue] = useState<SliderValue>();
+
+    useEffect(() => {
+        // Verifica si el filtro existe en filters
+        const existingFilter = filters?.find(filter => filter.filterKey === defaultValues.filterKey);
+
+        if (existingFilter) {
+            setValue(existingFilter.value);
+        } else {
+            setValue([defaultValues.min ?? 0, defaultValues.max ?? 100]);
+        }
+    }, [filters, defaultValues.filterKey, defaultValues.min, defaultValues.max]);
 
     const handleSliderChange = (newValue: SliderValue) => {
         setValue(newValue);

@@ -1,5 +1,5 @@
 import { Button, Chip } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultValues, FilterComponentProps } from "./FilterComponent";
 
 import icons from "@/Icons";
@@ -16,6 +16,17 @@ export default function MultiSelectFilter({
     setFiltersDelete: any;
 }) {
     const [selectedKeys, setSelectedKeys] = useState<string[]>(defaultValues.value || []);
+
+    useEffect(() => {
+        // Verifica si el filtro existe en filters
+        const existingFilter = filters?.find(filter => filter.filterKey === defaultValues.filterKey);
+
+        if (existingFilter) {
+            setSelectedKeys(existingFilter.value);
+        } else {
+            setSelectedKeys(defaultValues.value || []);
+        }
+    }, [filters, defaultValues.filterKey, defaultValues.min, defaultValues.max]);
 
     const handleChipToggle = (key: string) => {
         const isSelected = selectedKeys.includes(key);
@@ -59,12 +70,12 @@ export default function MultiSelectFilter({
                     onPress={handleRemoveFilter}
                     radius="full"
                     className={`bg-transparent p-0 m-0 ${filters &&
-                            filters.find(
-                                (filter: FilterComponentProps) =>
-                                    filter.filterKey === defaultValues.filterKey
-                            )
-                            ? "opacity-100 visible"
-                            : "opacity-0 invisible"
+                        filters.find(
+                            (filter: FilterComponentProps) =>
+                                filter.filterKey === defaultValues.filterKey
+                        )
+                        ? "opacity-100 visible"
+                        : "opacity-0 invisible"
                         }`}
                 >
                     <icons.close className="text-primary-dark text-xl" />

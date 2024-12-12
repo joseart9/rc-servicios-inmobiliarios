@@ -1,5 +1,5 @@
 import { Checkbox, Button } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultValues, FilterComponentProps } from "./FilterComponent";
 
 import icons from "@/Icons";
@@ -15,28 +15,40 @@ export default function CheckboxFilter({
     filters?: FilterComponentProps[];
     setFiltersDelete: any;
 }) {
-    const [isChecked, setIsChecked] = useState<boolean>(defaultValues.value || false);
+    const [isChecked, setIsChecked] = useState<boolean>(false);
 
-    const handleCheckboxChange = (newValue: boolean) => {
+    useEffect(() => {
+        const existingFilter = filters?.find(filter => filter.filterKey === defaultValues.filterKey);
+        if (existingFilter) {
+            setIsChecked(existingFilter.value);
+        } else {
+            setIsChecked(defaultValues.value || false);
+        }
+    }, [filters, defaultValues.filterKey, defaultValues.value]);
+
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.checked;
         setIsChecked(newValue);
 
-        setFilters((prevFilters: any[]) => {
-            const updatedFilters = prevFilters.filter(
-                (filter) => filter.filterKey !== defaultValues.filterKey
-            );
-            return [
-                ...updatedFilters,
+        // Actualiza los filtros solo cuando sea necesario
+        if (newValue) {
+            setFilters((prevFilters: any[]) => [
+                ...prevFilters.filter(filter => filter.filterKey !== defaultValues.filterKey),
                 { filterKey: defaultValues.filterKey, type: defaultValues.type, value: newValue },
-            ];
-        });
+            ]);
+        } else {
+            handleRemoveFilter();
+        }
     };
 
     const handleRemoveFilter = () => {
-        setFiltersDelete((prevFilters: any[]) =>
-            prevFilters.filter((filter) => filter.filterKey !== defaultValues.filterKey)
-        );
+        // Asegúrate de no actualizar el estado del padre mientras estás renderizando
+        setTimeout(() => {
+            setFiltersDelete((prevFilters: any[]) =>
+                prevFilters.filter(filter => filter.filterKey !== defaultValues.filterKey)
+            );
+        }, 0);
 
-        // Reset checkbox state
         setIsChecked(false);
     };
 
@@ -66,8 +78,7 @@ export default function CheckboxFilter({
             </div>
 
             <Checkbox
-                isSelected={isChecked}
-                onChange={(e) => handleCheckboxChange(e.target.checked)}
+                onChange={(e) => handleCheckboxChange(e)}
                 color="warning"
                 size="md"
                 className="text-white"
