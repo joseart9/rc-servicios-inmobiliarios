@@ -8,7 +8,6 @@ import {
   NavbarMenuItem,
   NavbarContent,
   NavbarItem,
-  Link,
   Button,
 } from "@nextui-org/react";
 import menuItems from "./MenuItems";
@@ -24,6 +23,7 @@ import { useState } from "react";
 
 import icons from "@/Icons";
 import { useFavs } from "@/globals/FavsProvider";
+import Link from 'next/link'
 
 export default function NavbarComponent({ children }: { children?: ReactNode }) {
   const pathname = usePathname();
@@ -105,10 +105,12 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
 
           {menuItems.map((item, index) => (
             <NavbarItem key={`${item}-${index}`}>
-              <Button onPress={(_) => handleRoute(item.href, _)} radius="sm" size="md" variant={`${pathname === item.href ? "solid" : "light"}`} color={`${pathname === item.href ? "warning" : "warning"}`}
-                className={`font-semibold uppercase ${pathname === item.href ? "text-white" : "text-accent"}`}>
-                {item.label}
-              </Button>
+              <Link href={item.href}>
+                <Button radius="sm" size="md" variant={`${pathname === item.href ? "solid" : "light"}`} color={`${pathname === item.href ? "warning" : "warning"}`}
+                  className={`font-semibold uppercase ${pathname === item.href ? "text-white" : "text-accent"}`}>
+                  {item.label}
+                </Button>
+              </Link>
             </NavbarItem>
           ))}
         </NavbarContent>
@@ -129,8 +131,6 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
               <Link
                 className="w-full"
                 href={item.href}
-                size="lg"
-                color="foreground"
               >
                 {item.label}
               </Link>
