@@ -59,8 +59,8 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
   if (!isValidPath) {
     return (
       <section className="flex flex-col min-h-screen">
-        <Navbar isBlurred shouldHideOnScroll classNames={{
-          base: "bg-neutral/20", // Adjust the color and opacity as needed
+        <Navbar isBlurred={true} className="h-fit bg-primary/5" shouldHideOnScroll classNames={{
+          base: "bg-white",
         }}>
 
           <NavbarItem>
@@ -85,7 +85,7 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
 
   return (
     <section className="flex flex-col min-h-screen">
-      <Navbar isBlurred={true} className="h-fit bg-primary/5" shouldHideOnScroll classNames={{
+      <Navbar isBlurred={true} className="h-fit bg-primary/5" position="static" classNames={{
         base: "bg-white",
       }}>
         <NavbarContent className="sm:hidden" justify="start">
@@ -105,7 +105,7 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
 
           {menuItems.map((item, index) => (
             <NavbarItem key={`${item}-${index}`}>
-              <Button onPress={(_) => handleRoute(item.href, _)} radius="full" size="md" variant={`${pathname === item.href ? "solid" : "light"}`} color={`${pathname === item.href ? "warning" : "warning"}`}
+              <Button onPress={(_) => handleRoute(item.href, _)} radius="sm" size="md" variant={`${pathname === item.href ? "solid" : "light"}`} color={`${pathname === item.href ? "warning" : "warning"}`}
                 className={`font-semibold uppercase ${pathname === item.href ? "text-white" : "text-accent"}`}>
                 {item.label}
               </Button>

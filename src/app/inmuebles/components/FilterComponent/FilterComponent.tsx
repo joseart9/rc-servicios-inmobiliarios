@@ -13,6 +13,10 @@ import SelectFilter from "./SelectFilter";
 import { Slider } from "@nextui-org/react";
 import CheckboxFilter from "./CheckboxFilter";
 import MultiSelectFilter from "./MultiSelectFilter";
+import { IoMdArrowDropright } from "react-icons/io";
+import { IoMdArrowDropleft } from "react-icons/io";
+
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 export interface DefaultValues {
     type: string;
@@ -32,7 +36,7 @@ export interface FilterComponentProps {
     type?: string;
 }
 
-export default function FilterComponent({ filters, setFilters }: { filters: FilterComponentProps[], setFilters: Function }) {
+export default function FilterComponent({ filters, setFilters, isExpanded, setIsExpanded }: { filters: FilterComponentProps[], setFilters: Function; isExpanded: boolean; setIsExpanded: Function }) {
 
     const [mockFilters, setMockFilters] = useState<FilterComponentProps[]>([]);
 
@@ -160,9 +164,15 @@ export default function FilterComponent({ filters, setFilters }: { filters: Filt
     return (
         <div className="w-full bg-white rounded-lg h-[550px] flex flex-col">
             {/* Header fijo */}
-            <h3 className="text-white bg-primary-dark px-4 p-1 font-semibold text-lg rounded-t-lg">
-                Filtros
-            </h3>
+            <div className="flex flex-row justify-between bg-primary-dark rounded-t-lg">
+                <h3 className="text-white bg-primary-dark px-4 p-1 font-semibold text-lg rounded-t-lg">
+                    Filtrar
+                </h3>
+                <Button isIconOnly color="warning" variant="light" onPress={() => setIsExpanded(!isExpanded)}>
+                    <IoMdArrowRoundBack className="font-black size-7 text-white" />
+                </Button>
+            </div>
+
 
             {/* Contenedor scrollable */}
             <div className="flex-1 overflow-y-auto overflow-x-hidden">
@@ -242,11 +252,11 @@ export default function FilterComponent({ filters, setFilters }: { filters: Filt
             {/* Botón fijo */}
             <div className="relative flex w-full items-center justify-center py-4">
                 {mockFilters.length > 0 ? (
-                    <Button onPress={handleSetFilters} color="warning" className="text-white font-semibold">
+                    <Button onPress={handleSetFilters} color="warning" className="text-white font-semibold w-full">
                         Aplicar
                     </Button>
                 ) : (
-                    <Button color="warning" isDisabled className="text-white font-semibold opacity-30">
+                    <Button color="warning" isDisabled className="text-white font-semibold opacity-30 w-full">
                         Aplicar
                     </Button>
                 )}

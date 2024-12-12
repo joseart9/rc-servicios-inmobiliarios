@@ -48,47 +48,32 @@ export default function ServiciosComponent() {
     return (
         <div id="servicios-section" className="container mx-auto">
             <Swiper
-                spaceBetween={1}
-                slidesPerView={1}
+                spaceBetween={20}
+                slidesPerView={"auto"}
                 modules={[Pagination, Autoplay]}
                 pagination={{
                     clickable: true,
                     dynamicBullets: true,
                 }}
-                breakpoints={{
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 2,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 2,
-                    },
-                    1280: {
-                        slidesPerView: 4,
-                        spaceBetween: 2,
-                    },
-
-                }}
                 loop
-                className="w-full custom-swiper pb-12"
+                className="custom-swiper mini-swiper"
                 autoplay={{
                     delay: 3000, // Deslizamiento automático cada 3 segundos
                     disableOnInteraction: true, // No detener el autoplay al interactuar
                 }}
             >
                 {servicios.map((servicio, index) => (
-                    <SwiperSlide key={index} className="px-6">
+                    <SwiperSlide key={index} className="">
                         <motion.div
                             key={index}
                             custom={index}
                             initial="hidden"
                             animate={isVisible ? "visible" : "hidden"}
                             variants={cardVariants}
-                            className="w-full h-full pb-4 pt-1"
+                            className="w-full h-full pb-4 pt-1 px-2"
                             viewport={{ once: true }}
                         >
-                            <Card isPressable className="flex w-[300px] h-[400px] flex-shrink-0 bg-inherit shadow-md shadow-primary-light/15" shadow="none">
+                            <Card isPressable className="flex w-[300px] h-[400px] flex-shrink-0 bg-inherit shadow-md shadow-primary-light/20" shadow="none">
                                 <CardBody className="p-4">
                                     <div className="w-full h-full flex flex-col items-center gap-8">
                                         <Image

@@ -35,6 +35,10 @@
   padding-bottom: 32px !important;
 }
 
+.mini-swiper .swiper-slide {
+  width: auto !important;
+}
+
 /* Estilo adicional para otros elementos */
 #map {
   height: 400px;

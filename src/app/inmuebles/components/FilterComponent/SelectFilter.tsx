@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Select, SelectItem, Button } from "@nextui-org/react";
 import { DefaultValues, FilterComponentProps } from "./FilterComponent";
 
@@ -16,6 +16,17 @@ export default function SelectFilter({
     setFiltersDelete: any;
 }) {
     const [selectedValue, setSelectedValue] = useState<string>(defaultValues.value || "");
+
+    useEffect(() => {
+        // Verifica si el filtro existe en filters
+        const existingFilter = filters?.find(filter => filter.filterKey === defaultValues.filterKey);
+
+        if (existingFilter) {
+            setSelectedValue(existingFilter.value);
+        } else {
+            setSelectedValue(defaultValues.value || "");
+        }
+    }, [filters, defaultValues.filterKey, defaultValues.min, defaultValues.max]);
 
     const handleSelectionChange = (newValue: string) => {
         setSelectedValue(newValue);

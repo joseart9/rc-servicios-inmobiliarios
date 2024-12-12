@@ -5,6 +5,11 @@ import { useMemo } from "react";
 import { orderByField } from "@/server/actions/inmuebles";
 import Inmueble from "@/types/Inmueble";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
 export default function MoreInbueblesComponent({ currentInmueble }: { currentInmueble: Inmueble }) {
 
     const orderByData: orderByField = useMemo(() => ({ field: "createdAt", direction: "desc" }), []);
@@ -16,25 +21,38 @@ export default function MoreInbueblesComponent({ currentInmueble }: { currentInm
 
     return (
         <div className="col-span-2 w-full">
-            <h1 className="text-xl font-semibold uppercase text-accent">
+            <h1 className="text-xl font-semibold uppercase text-accent py-4">
                 También te puede interesar
             </h1>
-            <div className="flex flex-row overflow-x-auto w-full h-full">
-                {loading ? (
-                    <div className="flex justify-center items-center w-full h-96">
-                        <Spinner color="warning" size="lg" />
-                    </div>
-                ) : (
-                    <div className="flex flex-row gap-2 overflow-x-auto w-full">
-                        {filteredInmuebles?.map((inmueble) => (
+            {loading ? (
+                <div className="flex justify-center items-center w-full h-96">
+                    <Spinner color="warning" size="lg" />
+                </div>
+            ) : (
+                <Swiper
+                    slidesPerView={"auto"}
+                    spaceBetween={20}
+                    pagination={{
+                        clickable: true,
+                        dynamicBullets: true,
+                    }}
+                    className="custom-swiper mini-swiper rounded-lg"
+                    modules={[Pagination, Autoplay]}
+                    loop
+                    autoplay={{
+                        delay: 2000, // Deslizamiento automático cada 3 segundos
+                        disableOnInteraction: true, // No detener el autoplay al interactuar
+                    }}
+                >
+                    {filteredInmuebles?.map((inmueble) => (
+                        <SwiperSlide key={inmueble.idInmueble}>
                             <InmuebleCardMinimal
-                                key={inmueble.idInmueble}
                                 inmueble={inmueble}
                             />
-                        ))}
-                    </div>
-                )}
-            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            )}
         </div>
     )
 }
