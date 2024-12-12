@@ -40,6 +40,8 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
     const { coordinates, loading: coordinatesLoading } = useFetchCoordinates(inmueble.direccion);
     const textRef = useRef<HTMLParagraphElement>(null);
 
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
     const { favs, addFav, removeFav } = useFavs();
 
     useEffect(() => {
@@ -138,9 +140,10 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                             enabled: true,
                             onlyInViewport: true
                         }}
+                        thumbs={{ swiper: thumbsSwiper }}
                         spaceBetween={10}
                         slidesPerView={1}
-                        className="w-full h-[550px] rounded-lg object-cover col-span-2 custom-swiper"
+                        className="w-full h-[550px] rounded-lg object-cover col-span-2 custom-swiper mySwiper2"
                         loop
                     >
                         {inmueble.imagenes?.map((imagen, index) => (

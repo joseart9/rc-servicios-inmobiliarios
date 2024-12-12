@@ -108,14 +108,21 @@ export default function InmuebleInfoShowcase({ inmueble }: { inmueble: Inmueble 
             suffix: ""
         },
         {
-            title: "Superficie Cubierta",
+            title: "Metros de Terreno",
             value: inmueble.terreno.superficieCubierta,
             displayValue: inmueble.terreno.superficieCubierta,
             icon: <BiArea className="text-5xl text-accent" />,
             suffix: "m²"
         },
         {
-            title: "Total Construcción",
+            title: "Superficie Total",
+            value: inmueble.terreno.terreno,
+            displayValue: inmueble.terreno.terreno,
+            icon: <BiArea className="text-5xl text-accent" />,
+            suffix: "m²"
+        },
+        {
+            title: "Metros de Construcción",
             value: inmueble.terreno.superficieTotal,
             displayValue: inmueble.terreno.superficieTotal,
             icon: <TbArrowAutofitHeight className="text-5xl text-accent" />,
