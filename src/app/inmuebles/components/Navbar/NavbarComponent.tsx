@@ -42,10 +42,6 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
     return null; // Opcionalmente muestra un loader.
   }
 
-  function handleRoute(href: string, _: any) {
-    router.push(href)
-  }
-
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
