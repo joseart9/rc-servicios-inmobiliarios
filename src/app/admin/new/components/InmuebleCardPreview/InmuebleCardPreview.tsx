@@ -7,8 +7,6 @@ import { CiImageOff } from "react-icons/ci";
 
 export default function InmuebleCard({ inmueble, images }: { inmueble: Inmueble; images: ImageUploadProps[] }) {
 
-    console.log("IMAGES EN INMUEBLE CARD", images);
-
     return (
         <Card radius="sm" className="w-auto relative group shadow-md rounded-none rounded-b-md">
             <CardHeader className="p-0 w-full h-[300px] z-0">

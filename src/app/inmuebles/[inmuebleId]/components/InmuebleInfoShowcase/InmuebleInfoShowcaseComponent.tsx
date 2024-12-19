@@ -25,8 +25,6 @@ import { MdOutlineSell } from "react-icons/md";
 
 export default function InmuebleInfoShowcase({ inmueble }: { inmueble: Inmueble }) {
 
-    console.log(inmueble)
-
     const textColor = "text-accent";
 
     const formatTipoInmueble = (tipoInmueble: string | null) => {
@@ -182,7 +180,7 @@ export default function InmuebleInfoShowcase({ inmueble }: { inmueble: Inmueble 
     const filteredData = data.filter(item => item.value !== undefined && item.value !== null && item.value !== false);
 
     return (
-        <div className="flex flex-col overflow-auto overflow-y-auto h-full w-full max-h-[550px] justify-stretch rounded-lg bg-white/50">
+        <div className="flex flex-col overflow-auto overflow-y-auto h-full w-full max-h-[550px] justify-stretch rounded-lg bg-white/70">
             <div className="w-full mb-3 sticky top-0 z-10">
                 <h1 className="bg-accent p-2 text-xl rounded-t-lg text-white font-semibold">
                     Características

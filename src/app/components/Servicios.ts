@@ -1,20 +1,20 @@
 const servicios = [
   {
-    title: "Servicio 1",
+    title: "Valuaciones",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
     img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
     href: "/",
   },
   {
-    title: "Servicio 2",
+    title: "Pólizas Jurídicas",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
     img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",
     href: "/",
   },
   {
-    title: "Servicio 3",
+    title: "Créditos",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
     img: "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp",

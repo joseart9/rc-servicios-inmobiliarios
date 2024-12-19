@@ -5,7 +5,6 @@ import icons from "@/Icons";
 import { FilterComponentProps } from "./FilterComponent";
 
 export default function FilterComponentSmall({ isExpanded, setIsExpanded, filters }: { isExpanded: boolean, setIsExpanded: Function; filters: FilterComponentProps[] }) {
-    console.log(filters);
     return (
         <div className="w-full bg-white rounded-lg h-[550px] flex flex-col items-center">
             <div className="flex bg-primary-dark rounded-t-lg w-full justify-center">

@@ -37,12 +37,14 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
 
     const [expanded, setExpanded] = useState(false);
     const [isOverflowing, setIsOverflowing] = useState(false);
-    const { coordinates, loading: coordinatesLoading } = useFetchCoordinates(inmueble.direccion);
+    console.log("DIreccion:", inmueble.direccion);
+    const { coordinates, loading: coordinatesLoading, error: coordintesError } = useFetchCoordinates(inmueble.direccion);
     const textRef = useRef<HTMLParagraphElement>(null);
 
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
     const { favs, addFav, removeFav } = useFavs();
+
+    console.log("COOOOOORDENADAS:", coordinates);
+    console.log("ERROR:", coordintesError);
 
     useEffect(() => {
         if (textRef.current) {
@@ -140,7 +142,6 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                             enabled: true,
                             onlyInViewport: true
                         }}
-                        thumbs={{ swiper: thumbsSwiper }}
                         spaceBetween={10}
                         slidesPerView={1}
                         className="w-full h-[550px] rounded-lg object-cover col-span-2 custom-swiper mySwiper2"
@@ -164,7 +165,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
 
 
                 {/* Descripcion */}
-                <section className="flex flex-col w-full h-full min-h-[400px] rounded-lg bg-white">
+                <section className="flex flex-col w-full h-full rounded-lg bg-white/70">
                     <h1 className="bg-accent p-2 text-xl rounded-t-lg text-white font-semibold">
                         Descripción de la propiedad
                     </h1>
@@ -210,7 +211,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                 <section className="grid grid-cols-3 w-full gap-2">
                     <section className="grid grid-rows-2 grid-cols-1 gap-4 w-full justify-between">
                         {/* Amenidades */}
-                        <div className=" rounded-lg bg-white">
+                        <div className=" rounded-lg bg-white/70">
                             <h1 className="bg-accent p-2 text-xl rounded-t-lg text-white font-semibold">
                                 Amenidades
                             </h1>
@@ -229,7 +230,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                         </div>
 
                         {/* Servicios */}
-                        <div className=" rounded-lg bg-white">
+                        <div className=" rounded-lg bg-white/70">
                             <h1 className="bg-accent p-2 text-xl rounded-t-lg text-white font-semibold">
                                 Servicios
                             </h1>

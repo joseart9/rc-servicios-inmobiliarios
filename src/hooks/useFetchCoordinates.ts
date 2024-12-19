@@ -1,3 +1,4 @@
+"use client";
 import Direccion from "@/types/Direccion";
 import { useState, useEffect } from "react";
 
@@ -16,41 +17,65 @@ export function useFetchCoordinates(direccion?: Direccion) {
         return;
       }
 
-      const { calle, numeroExterior, ciudad, estado, pais, cp } = direccion;
+      // Normalizar la dirección (convertir todos los valores a minúsculas y eliminar espacios extra)
+      const normalize = (value?: string | number) =>
+        value?.toString().trim().toLowerCase() || "";
 
-      const url = new URL("https://nominatim.openstreetmap.org/search");
-      const params = {
-        street: `${calle || ""} ${numeroExterior || ""}`.trim(),
-        city: ciudad || "",
-        state: estado || "",
-        country: pais || "",
-        postalcode: cp || "",
-        format: "json",
-      };
+      const {
+        calle,
+        numeroExterior,
+        numeroInterior,
+        colonia,
+        ciudad,
+        estado,
+        pais,
+        cp,
+      } = direccion;
 
-      // Añadir parámetros a la URL
-      Object.entries(params).forEach(([key, value]) => {
-        if (value) url.searchParams.append(key, value);
-      });
+      const query = [
+        normalize(calle),
+        normalize(numeroExterior),
+        normalize(numeroInterior),
+        normalize(colonia),
+        normalize(ciudad),
+        normalize(estado),
+        normalize(pais),
+        normalize(cp),
+      ]
+        .filter(Boolean) // Filtrar valores vacíos
+        .join(", "); // Unir con comas para formar la consulta
+
+      const apiKey = process.env.NEXT_PUBLIC_GEOCAGE_API_KEY;
+      if (!apiKey) {
+        setError("La API Key no está configurada.");
+        setLoading(false);
+        return;
+      }
+
+      const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+        query
+      )}&key=${apiKey}&limit=1`;
 
       // DEBUG
-      console.log("Fetching coordinates for:", params);
-      console.log("URL:", url.toString());
+      console.log("Fetching coordinates for query:", query);
+      console.log("URL:", url);
 
       setLoading(true);
 
       try {
-        const response = await fetch(url.toString());
+        const response = await fetch(url);
         const data = await response.json();
-        if (data.length > 0) {
-          setCoordinates([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
+
+        if (data.results && data.results.length > 0) {
+          const { lat, lng } = data.results[0].geometry;
+          setCoordinates([lat, lng]);
         } else {
           setError(
             "No se encontraron coordenadas para la dirección proporcionada."
           );
         }
       } catch (err) {
-        setError("Error fetching coordinates.");
+        setError("Error al buscar las coordenadas.");
         console.error("Error fetching coordinates:", err);
       } finally {
         setLoading(false);
