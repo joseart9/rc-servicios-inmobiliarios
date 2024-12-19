@@ -20,7 +20,7 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
 
     return (
         <div
-            className="pt-4 col-span-1 text-center shadow-sm rounded-lg w-full border-1 border-primary-dark/30"
+            className="pt-4 col-span-1 text-center shadow-sm rounded-lg w-full bg-white/50"
         >
             <h3 className="text-xl text-primary-dark font-semibold pb-8 uppercase">
                 Contacto

@@ -79,14 +79,6 @@ export default function DesktopViewComponent({ type }: { type: string }) {
         }
     ]
 
-    // Encontrar el texto legible para mostrar en el botón
-    const selectedDisplayValue = useMemo(() => {
-        const selectedItem = orderByValues.find(item => item.key === selectedValue);
-        return selectedItem ? selectedItem.value : "";
-    }, [selectedValue]);
-
-    console.log(inmuebles);
-
 
     return (
         <section className="flex flex-col w-full py-4 gap-4 container mx-auto p-2">

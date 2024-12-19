@@ -74,8 +74,6 @@ export default function useInmuebles({
     createdAt: "createdAt",
   };
 
-  console.log("Memoized orderByData", memoizedOrderByData);
-
   useEffect(() => {
     const fetchInmuebles = async () => {
       try {
@@ -94,7 +92,7 @@ export default function useInmuebles({
     };
 
     fetchInmuebles();
-  }, []);
+  }, [filter]);
 
   useEffect(() => {
     if (!allInmuebles) return;
@@ -163,7 +161,7 @@ export default function useInmuebles({
     }
 
     setFilteredInmuebles(filtered);
-  }, [allInmuebles, memoizedSubFilter, memoizedOrderByData]);
+  }, [allInmuebles, memoizedSubFilter, memoizedOrderByData, filter]);
 
   return { inmuebles: filteredInmuebles, loading, error };
 }

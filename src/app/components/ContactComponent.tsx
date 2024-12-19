@@ -3,7 +3,7 @@ import { Input, Button, Textarea } from '@nextui-org/react'
 export default function ContactComponent({ bordered, title, defaultMsg, size }: { bordered?: boolean, title?: string, defaultMsg?: string, size?: 'sm' | 'md' | 'lg' }) {
     return (
         <div
-            className={`pt-4 col-span-1 text-center shadow-sm rounded-lg
+            className={`pt-4 col-span-1 text-center rounded-lg
                 ${bordered ? `border-1 border-primary-dark/30` : ``} 
                 w-full`}
         >

@@ -23,8 +23,6 @@ export default function Home() {
 
     const inmueblesToShow = inmuebles?.slice(0, 10);
 
-    console.log(inmueblesToShow)
-
     const scrollToServicios = () => {
         const formElement = document.getElementById("servicios");
         if (formElement) {

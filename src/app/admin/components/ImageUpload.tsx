@@ -65,8 +65,6 @@ export default function ImageUpload({ images, setImages }: { images: ImageUpload
         }
     }
 
-    console.log("IMÁGENES en IMG UPLOAD", images);
-
     return (
         <div className="flex gap-5 overflow-x-auto min-w-full pt-2 md:flex-wrap">
             {/* Botón para agregar imágenes */}

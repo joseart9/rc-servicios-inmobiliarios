@@ -164,9 +164,9 @@ export default function FilterComponent({ filters, setFilters, isExpanded, setIs
     return (
         <div className="w-full bg-white rounded-lg h-[550px] flex flex-col">
             {/* Header fijo */}
-            <div className="flex flex-row justify-between bg-primary-dark rounded-t-lg">
-                <h3 className="text-white bg-primary-dark px-4 p-1 font-semibold text-lg rounded-t-lg">
-                    Filtrar
+            <div className="flex flex-row justify-between items-center bg-primary-dark rounded-t-lg">
+                <h3 className="text-white bg-primary-dark px-4 p-1 font-semibold text-xl rounded-t-lg">
+                    Filtros
                 </h3>
                 <Button isIconOnly color="warning" variant="light" onPress={() => setIsExpanded(!isExpanded)}>
                     <IoMdArrowRoundBack className="font-black size-7 text-white" />

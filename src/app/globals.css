@@ -43,3 +43,7 @@
 #map {
   height: 400px;
 }
+
+.hero-swiper .swiper-slide {
+  height: "calc(100vh - 64px)";
+}

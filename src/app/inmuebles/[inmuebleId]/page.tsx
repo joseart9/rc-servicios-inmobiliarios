@@ -27,9 +27,6 @@ export default function InmuebleIdPage({
 
     return (
         <>
-            {/* <div>
-                <h1>Page: {inmuebleId}</h1>
-            </div> */}
             <section className="w-full h-full">
                 {screenSize === "desktop" && <DesktopViewInmuebleShowcase inmueble={inmueble!} loading={loading} />}
             </section>

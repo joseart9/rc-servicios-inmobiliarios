@@ -53,7 +53,6 @@ export default function ServiciosComponent() {
                 modules={[Pagination, Autoplay]}
                 pagination={{
                     clickable: true,
-                    dynamicBullets: true,
                 }}
                 loop
                 className="custom-swiper mini-swiper"
