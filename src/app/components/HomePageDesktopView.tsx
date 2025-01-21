@@ -46,27 +46,37 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="flex w-screen text-center bg-primary/5 justify-center items-center"
+                className="grid grid-cols-12 gap-x-8 w-screen text-center bg-primary/5 justify-center items-center"
             >
-                <div className="text-primary-dark/80 text-pretty font-semibold tracking-wider italic text-3xl py-8 max-w-5xl">
-                    <span className="text-3xl text-primary-dark font-black">
-                        "
-                    </span>
-                    Transformamos espacios en sueños; confía en expertos para encontrar, comprar o rentar el inmueble perfecto para tu vida.
-                    <span className="text-3xl text-primary-dark font-black">
-                        "
-                    </span>
+                <div className="flex flex-col col-span-6 h-full items-center justify-center space-y-12">
+                    <h2 className="px-8 text-primary-dark/80 text-pretty font-semibold tracking-wider italic text-4xl">
+                        <span className="text-4xl text-primary-dark font-black">
+                            "
+                        </span>
+                        Transformamos espacios en sueños; confía en expertos para encontrar, comprar o rentar el inmueble perfecto para tu vida.
+                        <span className="text-4xl text-primary-dark font-black">
+                            "
+                        </span>
+                    </h2>
 
-                    <Spacer y={8} />
+                    <div className="flex flex-col space-y-5">
+                        <h2 className="text-2xl italic text-primary-dark/75">
+                            ¡Encuentra tu inmueble ideal!
+                        </h2>
 
-                    <ButtonGroup>
-                        <Button size="lg" color="default" className="bg-primary-dark text-white font-semibold">
-                            Venta
-                        </Button>
-                        <Button size="lg" color="default" className="bg-primary-dark text-white font-semibold">
-                            Renta
-                        </Button>
-                    </ButtonGroup>
+                        <ButtonGroup radius="sm" size="lg">
+                            <Button size="lg" color="default" className="bg-primary-dark text-white font-semibold">
+                                Venta
+                            </Button>
+                            <Button size="lg" color="default" className="bg-primary-dark text-white font-semibold">
+                                Renta
+                            </Button>
+                        </ButtonGroup>
+                    </div>
+                </div>
+
+                <div className="col-span-6">
+                    <img src="/HeroImg1.webp" alt="Crédito" className="w-full h-full object-cover" />
                 </div>
             </motion.div>
 
@@ -74,9 +84,9 @@ export default function Home() {
             <div className="flex w-full mb-20" />
 
 
-            <div className="grid grid-cols-3 w-full container mx-auto px-2 gap-6 max-w-5xl">
+            <div className="grid grid-cols-3 w-full p-2 gap-x-10">
                 <div className="col-span-2">
-                    <h3 className="text-xl font-semibold uppercase text-accent pt-4 pb-4">
+                    <h3 className="text-3xl font-semibold uppercase text-accent pt-4 pb-4">
                         Recién Agregados
                     </h3>
                     {loading ? (
@@ -117,7 +127,7 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="pt-4 col-span-1 text-center shadow-sm rounded-md shadow-primary-light/25 w-full"
                 >
-                    <h3 className="text-xl text-primary-dark font-semibold uppercase">
+                    <h3 className="text-3xl text-primary-dark font-semibold uppercase">
                         Contáctanos
                     </h3>
                     <ContactComponent bordered={false} size="sm" />

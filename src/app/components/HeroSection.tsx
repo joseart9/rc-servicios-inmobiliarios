@@ -83,7 +83,7 @@ export default function HeroSection({
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: .6, delay: 1 }}
-                        className="mb-5 text-5xl font-black text-white tracking-wide"
+                        className="mb-5 text-7xl font-black text-white tracking-wide"
                     >
                         RC Servicios Inmobiliarios
                     </motion.h1>
@@ -92,7 +92,7 @@ export default function HeroSection({
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: .6, delay: 1 }}
-                        className=" mb-5 text-pretty text-white/80"
+                        className=" mb-5 text-pretty text-lg text-white/80 w-[600px]"
                     >
                         Encuentra el hogar perfecto; Somos especialistas en venta y renta
                         de inmuebles que se adaptan a tus necesidades.

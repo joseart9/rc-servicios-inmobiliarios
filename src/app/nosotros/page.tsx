@@ -3,11 +3,11 @@ import InmueblesNavbar from "@/app/inmuebles/components/Navbar";
 export default function Nosotros() {
     return (
         <InmueblesNavbar>
-            <h1 className="text-primary-dark text-4xl font-bold py-6 mb-7 px-8">
+            <h1 className="text-primary-dark text-4xl font-bold py-6 mb-7 px-8 md:container md:mx-auto">
                 Nosotros
             </h1>
 
-            <div className="flex flex-col space-y-12 items-center p-4">
+            <div className="flex flex-col space-y-24 items-center p-4 md:container md:mx-auto">
                 <section className="flex flex-col md:grid grid-cols-12 gap-8  p-4 rounded-lg items-center">
                     <div
                         className="w-full md:col-span-6 h-64 bg-cover bg-center text-white rounded-lg flex items-center justify-center"

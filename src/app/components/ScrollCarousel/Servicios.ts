@@ -4,21 +4,35 @@ const servicios = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
     img: "/valuacion.jpeg",
-    href: "/",
+    href: "/valuacion",
   },
   {
     title: "Pólizas Jurídicas",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
     img: "/poliza.jpeg",
-    href: "/",
+    href: "/polizas",
   },
   {
     title: "Créditos",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
     img: "/credito.jpeg",
-    href: "/",
+    href: "/credito",
+  },
+  {
+    title: "Venta",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
+    img: "/poliza.jpeg",
+    href: "/inmuebles/venta",
+  },
+  {
+    title: "Renta",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus ut nunc vestibulum tincidunt",
+    img: "/credito.jpeg",
+    href: "/inmuebles/renta",
   },
 ];
 
