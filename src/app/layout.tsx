@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-neutral/20">
+    <html lang="en" className="bg-neutral/20 overflow-x-hidden">
 
       <body
         className={`${geistSans.variable} ${geistMono.variable}antialiased bg-neutral/20`}

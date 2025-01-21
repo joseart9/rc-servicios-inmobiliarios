@@ -3,6 +3,8 @@ import InmueblesNavbar from "@/app/inmuebles/components/Navbar";
 import ContactComponent from "../components/ContactComponent";
 import { Button } from "@nextui-org/button";
 
+import { motion } from "framer-motion";
+
 export default function Valuacion() {
     const scrollToForm = () => {
         const formElement = document.getElementById("contact-form");
@@ -13,7 +15,12 @@ export default function Valuacion() {
 
     return (
         <InmueblesNavbar>
-            <article className="container mx-auto md:py-8 w-full flex flex-col gap-4 max-w-2xl">
+            <motion.article
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: .5 }}
+
+                className="container mx-auto md:py-8 w-full flex flex-col gap-4 max-w-2xl">
                 <section className="w-full h-screen">
                     <img className="w-64 float-left aspect-[1/1] lg:aspect-[1/2] 
                     md:rounded-lg shadow-lg object-cover object-center mb-0 mr-4 
@@ -62,7 +69,7 @@ export default function Valuacion() {
                 <div id="contact-form">
                     <ContactComponent size="lg" defaultMsg="¡Hola!, Estoy interesad@ en realizar una valuación para mi propiedad" />
                 </div>
-            </article>
+            </motion.article>
         </InmueblesNavbar>
     );
 }

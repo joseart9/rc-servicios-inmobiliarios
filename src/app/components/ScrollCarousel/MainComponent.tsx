@@ -5,6 +5,8 @@ import { useRef } from "react";
 import CardType from "./CardType";
 import Servicios from "./Servicios";
 
+import { useRouter } from "next/navigation";
+
 const cards: CardType[] = Servicios;
 
 const Example = () => {
@@ -21,7 +23,7 @@ const HorizontalScrollCarousel = () => {
         target: targetRef,
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-25%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-35%"]);
 
     return (
         <section ref={targetRef} className="relative h-[170vh] mt-20 bg-neutral/30">
@@ -30,7 +32,7 @@ const HorizontalScrollCarousel = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true, margin: '-100px 0px -100px 0px' }}
-                className="text-4xl font-bold text-primary-dark text-center -mb-12 tracking-wide">
+                className="text-5xl font-bold text-primary-dark text-center -mb-12 tracking-wide">
                 Nuestros Servicios
             </motion.h2>
             <div className="sticky top-0 flex h-screen items-center overflow-hidden">
@@ -45,10 +47,12 @@ const HorizontalScrollCarousel = () => {
 };
 
 const Card = ({ card }: { card: CardType }) => {
+    const router = useRouter();
     return (
         <div
             key={card.title}
-            className="group relative h-[450px] w-[450px] overflow-hidden"
+            className="group relative h-[450px] w-[450px] overflow-hidden transition-transform duration-300 hover:scale-105 mr-10 cursor-pointer"
+            onClick={() => router.push(card.href)}
         >
             {/* Imagen de fondo */}
             <div
@@ -57,12 +61,12 @@ const Card = ({ card }: { card: CardType }) => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
-                className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
+                className="absolute inset-0 z-0 rounded-full"
             ></div>
 
             {/* Contenedor del título */}
             <div className="absolute inset-0 z-10 flex items-center justify-center">
-                <p className="w-full bg-gradient-to-br from-white/20 to-white/0 p-8 text-4xl font-black uppercase text-white text-center backdrop-blur-md px-2">
+                <p className="w-full mx-4 rounded-lg bg-gradient-to-br from-white/20 to-white/0 p-8 text-4xl font-black uppercase text-white text-center backdrop-blur-md px-2">
                     {card.title}
                 </p>
             </div>
