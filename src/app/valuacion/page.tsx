@@ -24,7 +24,7 @@ export default function Valuacion() {
                     hover:object-cover hover:object-center hover:shadow-lg hover:rounded-lg hover:transition-transform hover:scale-105 duration-500 ease-in-out
                     "
 
-                        src="valuacion.jpeg"
+                        src="/valuacion.jpeg"
                         alt="valuacion"
                     />
 

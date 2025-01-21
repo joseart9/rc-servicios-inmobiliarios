@@ -21,10 +21,10 @@ const HorizontalScrollCarousel = () => {
         target: targetRef,
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-25%"]);
 
     return (
-        <section ref={targetRef} className="relative h-[200vh] bg-neutral/20 ">
+        <section ref={targetRef} className="relative h-[170vh] mt-20 bg-neutral/30">
             <motion.h2
                 initial={{ opacity: 0, x: 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
