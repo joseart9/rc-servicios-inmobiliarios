@@ -41,7 +41,7 @@ export default function MoreInbueblesComponent({ currentInmueble }: { currentInm
                     loop
                     autoplay={{
                         delay: 2000, // Deslizamiento automático cada 3 segundos
-                        disableOnInteraction: true, // No detener el autoplay al interactuar
+                        disableOnInteraction: false, // No detener el autoplay al interactuar
                     }}
                 >
                     {filteredInmuebles?.map((inmueble) => (

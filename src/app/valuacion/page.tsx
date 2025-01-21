@@ -24,21 +24,26 @@ export default function Valuacion() {
                     hover:object-cover hover:object-center hover:shadow-lg hover:rounded-lg hover:transition-transform hover:scale-105 duration-500 ease-in-out
                     "
 
-                        src="HeroSectionImage.webp"
-                        alt="Valuación"
+                        src="valuacion.jpeg"
+                        alt="valuacion"
                     />
 
-                    <h1 className="font-black text-primary-dark text-xl uppercase mb-2 text-pretty">
+                    <h1 className="font-black text-primary-dark text-xl uppercase mb-3 text-pretty">
                         ¡Solicita una valuación para tu propiedad!
                     </h1>
 
-                    <p className="text-primary-dark/60 font-normal text-pretty mb-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet orci mi. Nam tempus lacus et mi faucibus maximus. Mauris commodo orci ac sapien fermentum pretium vitae nec ipsum. Nam quis augue cursus.
+                    <p className="text-primary-dark/60 font-normal text-pretty mb-5">
+                        ¿Quieres saber cuánto vale tu propiedad en el mercado actual? ¡En RC Servicios Inmobiliarios te ayudamos a descubrirlo! 🏡
+                    </p>
+
+                    <p className="text-primary-dark/60 font-normal text-pretty mb-5">
+                        Ofrecemos un servicio profesional de valuación de propiedades que te permitirá tomar decisiones informadas y seguras. Ya sea que estés pensando en vender, rentar o simplemente conocer el valor real de tu inmueble, nuestro equipo de expertos está listo para brindarte una evaluación precisa y personalizada.
                     </p>
 
                     <p className="text-primary-dark/60 font-normal text-pretty mb-2">
-                        Finibus quam ac, congue metus. Curabitur auctor et nisl ac condimentum. Pellentesque eu leo tellus. Cras maximus id orci sit amet consequat. Suspendisse vulputate iaculis luctus. Morbi pulvinar molestie erat, non feugiat diam ullamcorper eget.
+                        ¡Contáctanos hoy y descubre el verdadero potencial de tu propiedad! 📞
                     </p>
+
 
                     {/* Botón ajustado justo debajo del texto */}
                     <div className="h-fit w-full text-end pr-2 md:pr-0 animate-bounce animate-duration-[2000ms] animate-infinite">
