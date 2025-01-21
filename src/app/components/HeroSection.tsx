@@ -1,91 +1,107 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import { motion } from "framer-motion";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, EffectCreative } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
-import 'swiper/css/effect-fade';
+import "swiper/css/effect-fade";
 
-import Image from "next/image";
+/**
+ * Props:
+ * - hrefJump?: función para hacer scroll a otra sección.
+ * - setIsImageLoaded: función que actualiza el estado de Home para quitar el spinner.
+ */
+export default function HeroSection({
+    hrefJump,
+}: {
+    hrefJump?: () => void;
+}) {
+    const router = useRouter();
 
-export default function HeroSection({ hrefJump }: { hrefJump?: any }) {
-    const router = useRouter()
+    // Las rutas de las imágenes de fondo.
+    const heroImages = ["/HeroImg1.webp", "/HeroImg2.webp", "/HeroImg3.webp"];
+    const [imagesLoaded, setImagesLoaded] = useState(false);
 
-    const heroImages = [
-        "/HeroImg1.webp",
-        "/HeroImg2.webp",
-        "/HeroImg3.webp",
-    ]
+    // Pre-carga manual de imágenes (API nativa del navegador).
+    useEffect(() => {
+        let loadedCount = 0;
+
+        heroImages.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedCount++;
+                if (loadedCount === heroImages.length) {
+                    setImagesLoaded(true);
+                }
+            };
+        });
+    }, [heroImages]);
 
     return (
-        <div
-            className="hero relative"
-            style={{
-                height: "calc(100vh - 64px)",
-            }}
-        >
-            {/* Swiper de fondo */}
+        <motion.div
+
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: .3, delay: imagesLoaded ? 0 : 1 }}
+
+            className="hero relative overflow-x-hidden" style={{ height: "calc(100vh - 64px)" }}>
+            {/* Swiper de fondo con las imágenes ya pre-cargadas */}
             <Swiper
                 slidesPerView={"auto"}
                 spaceBetween={0}
                 modules={[Autoplay, EffectFade]}
                 className="absolute inset-0 w-full h-full z-0 hero-swiper"
                 loop
-                fadeEffect={{
-                    crossFade: true
-                }}
-                effect={'fade'}
-                autoplay={{
-                    delay: 5000
-                }}
+                fadeEffect={{ crossFade: true }}
+                effect="fade"
+                autoplay={{ delay: 5000 }}
             >
-                {heroImages.map((inmueble, index) => (
+                {heroImages.map((image, index) => (
                     <SwiperSlide key={index} className="w-full h-full">
-                        <Image
-                            src={inmueble}
+                        {/* No necesitamos onLoad. La imagen ya está en cache (o precargada). */}
+                        <img
+                            src={image}
                             alt={`Hero Image ${index}`}
                             className="object-cover w-full h-full"
-                            width={1080}
-                            height={720}
-                            placeholder="blur"
-                            blurDataURL={inmueble}
-                            priority={true}
-                            loading="eager"
                         />
                     </SwiperSlide>
                 ))}
             </Swiper>
 
-            {/* Overlay oscuro por encima del swiper */}
-            <div className="hero-overlay bg-opacity-60 h-full absolute inset-0 z-10"></div>
+            {/* Overlay oscuro */}
+            <div className="hero-overlay bg-opacity-60 h-full absolute inset-0 z-10" />
 
+            {/* Contenido (título, texto, botones, etc.) */}
             <div className="hero-content text-neutral-content text-center h-full z-50">
                 <div className="flex flex-col max-w-md items-center justify-center w-full">
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: .6, delay: 1 }}
                         className="mb-5 text-5xl font-black text-white tracking-wide"
                     >
                         RC Servicios Inmobiliarios
                     </motion.h1>
 
                     <motion.p
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.7 }}
+                        transition={{ duration: .6, delay: 1 }}
                         className=" mb-5 text-pretty text-white/80"
                     >
-                        Encuentra el hogar perfecto; Somos especialistas en venta y renta de inmuebles que se adaptan a tus necesidades.
+                        Encuentra el hogar perfecto; Somos especialistas en venta y renta
+                        de inmuebles que se adaptan a tus necesidades.
                     </motion.p>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
+                        transition={{ duration: .6, delay: 1 }}
                         className="flex flex-row w-fit"
                     >
                         <Button
@@ -121,9 +137,8 @@ export default function HeroSection({ hrefJump }: { hrefJump?: any }) {
                             <IoIosArrowDown size={32} className="text-white/50" />
                         </Button>
                     </motion.div>
-
                 </div>
             </div>
-        </div>
-    )
+        </motion.div>
+    );
 }
