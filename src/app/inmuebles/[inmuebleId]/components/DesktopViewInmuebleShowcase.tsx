@@ -37,14 +37,10 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
 
     const [expanded, setExpanded] = useState(false);
     const [isOverflowing, setIsOverflowing] = useState(false);
-    console.log("DIreccion:", inmueble.direccion);
     const { coordinates, loading: coordinatesLoading, error: coordintesError } = useFetchCoordinates(inmueble.direccion);
     const textRef = useRef<HTMLParagraphElement>(null);
 
     const { favs, addFav, removeFav } = useFavs();
-
-    console.log("COOOOOORDENADAS:", coordinates);
-    console.log("ERROR:", coordintesError);
 
     useEffect(() => {
         if (textRef.current) {
@@ -218,7 +214,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                             <section className="flex flex-wrap gap-2 p-2 items-center">
                                 {inmueble.caracteristicas?.amenidades?.map((amenidad, index) => (
                                     <Chip
-                                        className="cursor-default capitalize hover:text-2xl hover:p-5 group-hover:animate-ping transition-all duration-500 ease-in-out"
+                                        className="cursor-default uppercase hover:text-2xl hover:p-5 group-hover:animate-ping transition-all duration-500 ease-in-out"
                                         key={index}
                                         color="warning"
                                         variant="flat"
@@ -236,7 +232,7 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                             </h1>
                             <section className="flex flex-wrap gap-2 p-2 items-center">
                                 {inmueble.caracteristicas?.servicios?.map((servicio, index) => (
-                                    <Chip className="cursor-default capitalize hover:text-2xl hover:p-5 group-hover:animate-ping transition-all duration-500 ease-in-out" key={index} color="warning" variant="flat">
+                                    <Chip className="cursor-default uppercase hover:text-2xl hover:p-5 group-hover:animate-ping transition-all duration-500 ease-in-out" key={index} color="warning" variant="flat">
                                         {servicio.nombre}
                                     </Chip>
                                 ))}
@@ -255,8 +251,6 @@ export default function DesktopViewInmuebleShowcase({ inmueble, loading }: { inm
                         </div>
                     )}
                 </section>
-
-                <MapAdressDesc inmueble={inmueble} />
 
                 <section className="grid grid-cols-3 w-full h-full gap-2">
                     <MoreInbueblesComponent currentInmueble={inmueble} />

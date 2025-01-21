@@ -24,20 +24,24 @@ export default function Polizas() {
                     hover:object-cover hover:object-center hover:shadow-lg hover:rounded-lg hover:transition-transform hover:scale-105 duration-500 ease-in-out
                     "
 
-                        src="HeroSectionImage.webp"
-                        alt="Valuación"
+                        src="poliza.jpeg"
+                        alt="Poliza"
                     />
 
-                    <h1 className="font-black text-primary-dark text-xl uppercase mb-2 text-pretty">
+                    <h1 className="font-black text-primary-dark text-xl uppercase mb-3 text-pretty">
                         ¡Solicita una Póliza Jurídica!
                     </h1>
 
-                    <p className="text-primary-dark/60 font-normal text-pretty mb-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet orci mi. Nam tempus lacus et mi faucibus maximus. Mauris commodo orci ac sapien fermentum pretium vitae nec ipsum. Nam quis augue cursus.
+                    <p className="text-primary-dark/60 font-normal text-pretty mb-5">
+                        ¡Protege lo que más importa con nuestras pólizas jurídicas! 🔒
+                    </p>
+
+                    <p className="text-primary-dark/60 font-normal text-pretty mb-5">
+                        En RC Servicios Inmobiliarios, te brindamos la tranquilidad que necesitas al arrendar tu propiedad. Nuestras pólizas jurídicas están diseñadas para garantizar el cumplimiento de los contratos, proteger tus intereses y ofrecerte respaldo legal en todo momento.
                     </p>
 
                     <p className="text-primary-dark/60 font-normal text-pretty mb-2">
-                        Finibus quam ac, congue metus. Curabitur auctor et nisl ac condimentum. Pellentesque eu leo tellus. Cras maximus id orci sit amet consequat. Suspendisse vulputate iaculis luctus. Morbi pulvinar molestie erat, non feugiat diam ullamcorper eget.
+                        No dejes nada al azar; confía en nosotros para asegurarte de que todo esté en orden. ¡Contáctanos hoy y da un paso seguro hacia el futuro! 📩
                     </p>
 
                     {/* Botón ajustado justo debajo del texto */}

@@ -9,7 +9,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import servicios from "./Servicios";
+import servicios from "./ScrollCarousel/Servicios";
 
 export default function ServiciosComponent() {
 

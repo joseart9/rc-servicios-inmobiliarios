@@ -3,7 +3,7 @@
 import InmueblesNavbar from "@/app/inmuebles/components/Navbar";
 import HeroSection from "@/app/components/HeroSection";
 import ServiciosComponent from "@/app/components/ServiciosComponent";
-import { Button, Input, Textarea, Spinner } from "@nextui-org/react";
+import { Button, Input, Textarea, Spinner, ButtonGroup, Spacer } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import useInmuebles from "@/hooks/useInmuebles";
 import InmuebleCardMinal from "@/app/components/InmuebleCardMinimal";
@@ -15,6 +15,8 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import ContactComponent from "@/app/components/ContactComponent";
+
+import ScrollCarousel from "./ScrollCarousel";
 
 export default function Home() {
     const orderByData: orderByField = useMemo(() => ({ field: "createdAt", direction: "asc" }), []);
@@ -38,37 +40,41 @@ export default function Home() {
                 <div className="flex w-full py-8" />
 
 
-                <div className="container mx-auto px-2 max-w-5xl" id="servicios">
-                    <motion.h2
-                        initial={{ opacity: 0, y: -20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="text-4xl font-bold text-primary-dark mb-8"
-                        viewport={{ once: true }}
-                    >
-                        Nuestros Servicios
-                    </motion.h2>
-                    <ServiciosComponent />
+                <div className="bg-neutral/20" id="servicios">
+                    <ScrollCarousel />
                 </div>
-
-                <div className="flex w-full py-8" />
-
 
                 <motion.div
                     initial={{ opacity: 0, y: 100 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="flex w-screen container mx-auto px-24 bg-primary/5 rounded-3xl max-w-6xl"
+                    className="flex w-screen text-center bg-primary/5 justify-center items-center"
                 >
-                    <p className="text-primary-dark text-pretty text-center font-semibold tracking-wider italic text-3xl py-8">
-                        " Transformamos espacios en sueños; confía en expertos para
-                        encontrar, comprar o rentar el inmueble perfecto para tu vida. "
-                    </p>
+                    <div className="text-primary-dark/80 text-pretty font-semibold tracking-wider italic text-3xl py-8 max-w-5xl">
+                        <span className="text-3xl text-primary-dark font-black">
+                            "
+                        </span>
+                        Transformamos espacios en sueños; confía en expertos para encontrar, comprar o rentar el inmueble perfecto para tu vida.
+                        <span className="text-3xl text-primary-dark font-black">
+                            "
+                        </span>
+
+                        <Spacer y={8} />
+
+                        <ButtonGroup>
+                            <Button size="lg" color="default" className="bg-primary-dark text-white font-semibold">
+                                Venta
+                            </Button>
+                            <Button size="lg" color="default" className="bg-primary-dark text-white font-semibold">
+                                Renta
+                            </Button>
+                        </ButtonGroup>
+                    </div>
                 </motion.div>
 
 
-                <div className="flex w-full py-10" />
+                <div className="flex w-full mb-20" />
 
 
                 <div className="grid grid-cols-3 w-full container mx-auto px-2 gap-6 max-w-5xl">

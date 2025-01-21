@@ -24,20 +24,24 @@ export default function Credito() {
                     hover:object-cover hover:object-center hover:shadow-lg hover:rounded-lg hover:transition-transform hover:scale-105 duration-500 ease-in-out
                     "
 
-                        src="HeroSectionImage.webp"
-                        alt="Valuación"
+                        src="credito.jpeg"
+                        alt="Credito"
                     />
 
-                    <h1 className="font-black text-primary-dark text-xl uppercase mb-2 text-pretty">
+                    <h1 className="font-black text-primary-dark text-xl uppercase mb-3 text-pretty">
                         ¡Solicita un Credito!
                     </h1>
 
-                    <p className="text-primary-dark/60 font-normal text-pretty mb-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet orci mi. Nam tempus lacus et mi faucibus maximus. Mauris commodo orci ac sapien fermentum pretium vitae nec ipsum. Nam quis augue cursus.
+                    <p className="text-primary-dark/60 font-normal text-pretty mb-5">
+                        ¿Listo para dar el gran paso hacia tu nueva casa? 🏠
+                    </p>
+
+                    <p className="text-primary-dark/60 font-normal text-pretty mb-5">
+                        En RC Servicios Inmobiliarios, te ayudamos a obtener el crédito hipotecario que necesitas para hacer realidad tus sueños. 💡 Nos encargamos de asesorarte durante todo el proceso, buscando las mejores opciones en el mercado y garantizando que encuentres un financiamiento adaptado a tus necesidades.
                     </p>
 
                     <p className="text-primary-dark/60 font-normal text-pretty mb-2">
-                        Finibus quam ac, congue metus. Curabitur auctor et nisl ac condimentum. Pellentesque eu leo tellus. Cras maximus id orci sit amet consequat. Suspendisse vulputate iaculis luctus. Morbi pulvinar molestie erat, non feugiat diam ullamcorper eget.
+                        ¡Contáctanos hoy y da el primer paso hacia tu nuevo hogar! ✨
                     </p>
 
                     {/* Botón ajustado justo debajo del texto */}
