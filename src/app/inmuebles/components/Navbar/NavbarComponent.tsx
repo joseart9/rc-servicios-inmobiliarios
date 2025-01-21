@@ -60,7 +60,7 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
         }}>
 
           <NavbarItem>
-            <Button onPress={(_) => router.back()} isIconOnly className="bg-transparent" variant="light">
+            <Button disableRipple onPress={(_) => router.back()} isIconOnly className="bg-transparent" variant="light">
               <IoMdArrowRoundBack className="text-3xl text-accent" />
             </Button>
           </NavbarItem>
@@ -102,7 +102,7 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
           {menuItems.map((item, index) => (
             <NavbarItem key={`${item}-${index}`}>
               <Link href={item.href}>
-                <Button radius="sm" size="md" variant={`${pathname === item.href ? "solid" : "light"}`} color={`${pathname === item.href ? "warning" : "warning"}`}
+                <Button disableRipple radius="sm" size="md" variant={`${pathname === item.href ? "solid" : "light"}`} color={`${pathname === item.href ? "warning" : "warning"}`}
                   className={`font-semibold uppercase ${pathname === item.href ? "text-white" : "text-accent"}`}>
                   {item.label}
                 </Button>

@@ -37,9 +37,6 @@ export default function Home() {
             <div>
                 <HeroSection hrefJump={scrollToServicios} />
 
-                <div className="flex w-full py-8" />
-
-
                 <div className="bg-neutral/20" id="servicios">
                     <ScrollCarousel />
                 </div>

@@ -9,39 +9,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 import 'swiper/css/effect-fade';
 
-{/* <Swiper
-slidesPerView={"auto"}
-spaceBetween={20}
-pagination={{
-    clickable: true,
-    dynamicBullets: true,
-}}
-modules={[Pagination, Autoplay]}
-className="custom-swiper mini-swiper rounded-lg"
-loop
-autoplay={{
-    delay: 2000, // Deslizamiento automático cada 3 segundos
-    disableOnInteraction: true, // No detener el autoplay al interactuar
-}}
->
-{heroImages?.map((inmueble, index) => (
-    <SwiperSlide key={index}>
-        <img
-            src={inmueble}
-            alt="Hero Image"
-            className="object-cover w-full h-full"
-        />
-    </SwiperSlide>
-))}
-</Swiper> */}
+import Image from "next/image";
 
 export default function HeroSection({ hrefJump }: { hrefJump?: any }) {
     const router = useRouter()
 
     const heroImages = [
-        "HeroImg1.jpg",
-        "HeroImg2.webp",
-        "HeroImg3.jpg",
+        "/HeroImg1.webp",
+        "/HeroImg2.webp",
+        "/HeroImg3.webp",
     ]
 
     return (
@@ -68,10 +44,16 @@ export default function HeroSection({ hrefJump }: { hrefJump?: any }) {
             >
                 {heroImages.map((inmueble, index) => (
                     <SwiperSlide key={index} className="w-full h-full">
-                        <img
+                        <Image
                             src={inmueble}
                             alt={`Hero Image ${index}`}
                             className="object-cover w-full h-full"
+                            width={1080}
+                            height={720}
+                            placeholder="blur"
+                            blurDataURL={inmueble}
+                            priority={true}
+                            loading="eager"
                         />
                     </SwiperSlide>
                 ))}
@@ -85,25 +67,25 @@ export default function HeroSection({ hrefJump }: { hrefJump?: any }) {
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: 0.3 }}
                         className="mb-5 text-5xl font-black text-white tracking-wide"
                     >
                         RC Servicios Inmobiliarios
                     </motion.h1>
 
                     <motion.p
-                        initial={{ opacity: 0, x: -200 }}
+                        initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1.2 }}
+                        transition={{ duration: 0.7 }}
                         className=" mb-5 text-pretty text-white/80"
                     >
                         Encuentra el hogar perfecto; Somos especialistas en venta y renta de inmuebles que se adaptan a tus necesidades.
                     </motion.p>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 200 }}
+                        initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.6 }}
+                        transition={{ duration: 0.7 }}
                         className="flex flex-row w-fit"
                     >
                         <Button
