@@ -8,7 +8,7 @@ export default function Nosotros() {
             </h1>
 
             <div className="flex flex-col space-y-24 items-center p-4 md:container md:mx-auto">
-                <section className="flex flex-col md:grid grid-cols-12 gap-8  p-4 rounded-lg items-center">
+                <section className="flex flex-col md:grid grid-cols-12 gap-8 p-4 rounded-lg items-center">
                     <div
                         className="w-full md:col-span-6 h-64 bg-cover bg-center text-white rounded-lg flex items-center justify-center"
                         style={{ backgroundImage: "url('/mision.jpeg')" }}

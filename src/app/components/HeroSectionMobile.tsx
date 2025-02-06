@@ -10,11 +10,6 @@ import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
-/**
- * Props:
- * - hrefJump?: función para hacer scroll a otra sección.
- * - setIsImageLoaded: función que actualiza el estado de Home para quitar el spinner.
- */
 export default function HeroSection({
     hrefJump,
 }: {
@@ -49,7 +44,7 @@ export default function HeroSection({
             animate={{ opacity: 1 }}
             transition={{ duration: .3, delay: imagesLoaded ? 0 : 1 }}
 
-            className="hero relative overflow-x-hidden" style={{ height: "calc(100vh - 64px)" }}>
+            className="hero relative overflow-x-hidden" style={{ height: "calc(100dvh - 64px)" }}>
             {/* Swiper de fondo con las imágenes ya pre-cargadas */}
             <Swiper
                 slidesPerView={"auto"}
@@ -61,29 +56,31 @@ export default function HeroSection({
                 effect="fade"
                 autoplay={{ delay: 5000 }}
             >
-                {heroImages.map((image, index) => (
-                    <SwiperSlide key={index} className="w-full h-full">
-                        {/* No necesitamos onLoad. La imagen ya está en cache (o precargada). */}
-                        <img
-                            src={image}
-                            alt={`Hero Image ${index}`}
-                            className="object-cover w-full h-full"
-                        />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+                {
+                    heroImages.map((image, index) => (
+                        <SwiperSlide key={index} className="w-full h-full">
+                            {/* No necesitamos onLoad. La imagen ya está en cache (o precargada). */}
+                            <img
+                                src={image}
+                                alt={`Hero Image ${index}`}
+                                className="object-cover w-full h-full"
+                            />
+                        </SwiperSlide>
+                    ))
+                }
 
+            </Swiper>
             {/* Overlay oscuro */}
-            <div className="hero-overlay bg-opacity-60 h-full absolute inset-0 z-10" />
+            < div className="hero-overlay bg-opacity-60 h-full absolute inset-0 z-10" />
 
             {/* Contenido (título, texto, botones, etc.) */}
-            <div className="hero-content text-neutral-content text-center h-full z-50">
+            < div className="hero-content text-neutral-content text-center h-full z-20" >
                 <div className="flex flex-col max-w-md items-center justify-center w-full">
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: .6, delay: 1 }}
-                        className="mb-5 text-7xl font-black text-white tracking-wide"
+                        className="mb-5 text-5xl font-black text-white tracking-wide"
                     >
                         RC Servicios Inmobiliarios
                     </motion.h1>
@@ -92,7 +89,7 @@ export default function HeroSection({
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: .6, delay: 1 }}
-                        className=" mb-5 text-pretty text-lg text-white/80 w-[600px]"
+                        className=" mb-5 text-pretty text-lg text-white/80 w-full"
                     >
                         Encuentra el hogar perfecto; Somos especialistas en venta y renta
                         de inmuebles que se adaptan a tus necesidades.
@@ -138,7 +135,7 @@ export default function HeroSection({
                         </Button>
                     </motion.div>
                 </div>
-            </div>
-        </motion.div>
+            </div >
+        </motion.div >
     );
 }

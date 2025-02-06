@@ -46,7 +46,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="grid grid-cols-12 gap-x-8 w-screen text-center bg-primary/5 justify-center items-center"
+                className="grid grid-cols-12 gap-x-8 w-screen h-screen text-center bg-primary/5 justify-center items-center"
             >
                 <div className="flex flex-col col-span-6 h-full items-center justify-center space-y-12">
                     <h2 className="px-8 text-primary-dark/80 text-pretty font-semibold tracking-wider italic text-4xl">
@@ -80,11 +80,7 @@ export default function Home() {
                 </div>
             </motion.div>
 
-
-            <div className="flex w-full mb-20" />
-
-
-            <div className="grid grid-cols-3 w-full p-2 gap-x-10">
+            <div className="grid grid-cols-3 w-full p-6 gap-x-10">
                 <div className="col-span-2">
                     <h3 className="text-3xl font-semibold uppercase text-accent pt-4 pb-4">
                         Recién Agregados

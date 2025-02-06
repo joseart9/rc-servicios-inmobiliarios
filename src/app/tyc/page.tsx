@@ -3,7 +3,7 @@ import InmueblesNavbar from "@/app/inmuebles/components/Navbar";
 export default function Tya() {
     return (
         <InmueblesNavbar>
-            <div className="max-w-3xl h-full container mx-auto flex flex-col gap-3">
+            <div className="max-w-3xl h-full container mx-auto flex flex-col gap-3 p-4">
                 <h2 className="text-primary-dark font-semibold text-xl mb-2 pt-6 text-center">
                     Términos y Condiciones
                 </h2>

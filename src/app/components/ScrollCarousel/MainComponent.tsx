@@ -11,7 +11,7 @@ const cards: CardType[] = Servicios;
 
 const Example = () => {
     return (
-        <div className="bg-white">
+        <div className="">
             <HorizontalScrollCarousel />
         </div>
     );
@@ -23,10 +23,10 @@ const HorizontalScrollCarousel = () => {
         target: targetRef,
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-35%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-55%"]);
 
     return (
-        <section ref={targetRef} className="relative h-[170vh] mt-20 bg-neutral/30">
+        <section ref={targetRef} className="relative h-[170vh] pt-20">
             <motion.h2
                 initial={{ opacity: 0, x: 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
