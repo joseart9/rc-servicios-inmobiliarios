@@ -1,30 +1,50 @@
 "use client";
 
-import Drawer from 'react-modern-drawer'
-import 'react-modern-drawer/dist/index.css'
+import { useState, useEffect } from "react";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
 
-import useFavInmuebles from '@/hooks/useFavInmuebles'
-import { Button, Spinner, Tooltip } from '@nextui-org/react';
+import useFavInmuebles from "@/hooks/useFavInmuebles";
+import { Button, Spinner, Tooltip } from "@nextui-org/react";
 import InmuebleCard from "@/app/inmuebles/components/InmuebleCard";
-import icons from '@/Icons';
+import icons from "@/Icons";
 
-export default function DrawerComponent({ isOpen, toggleDrawer, favs }: { isOpen: boolean, toggleDrawer: () => void, favs: string[] }) {
-    const { inmuebles, loading, error } = useFavInmuebles(favs);
+export default function DrawerComponent({
+    isOpen,
+    toggleDrawer,
+    favs,
+}: { isOpen: boolean; toggleDrawer: () => void; favs: string[] }) {
+
+    const { inmuebles, loading } = useFavInmuebles(favs);
+
+    // Estado para el tamaño dinámico del Drawer
+    const [drawerSize, setDrawerSize] = useState(430);
+
+    // Detectar cambios en el tamaño de la pantalla
+    useEffect(() => {
+        const updateSize = () => {
+            setDrawerSize(window.innerWidth < 768 ? window.innerWidth : 430);
+        };
+
+        updateSize(); // Llamamos la función al montar
+        window.addEventListener("resize", updateSize); // Escuchamos cambios en el tamaño de la ventana
+
+        return () => window.removeEventListener("resize", updateSize); // Cleanup al desmontar
+    }, []);
 
     return (
         <Drawer
             open={isOpen}
             onClose={toggleDrawer}
             direction="right"
-            size={430}
+            size={drawerSize} // Uso del tamaño dinámico
             lockBackgroundScroll={true}
         >
+            {/* Header */}
             <div className="flex flex-row justify-between items-center bg-primary-dark px-4 py-3">
-                <div className='flex flex-row items-center gap-1'>
+                <div className="flex flex-row items-center gap-1">
                     <icons.favoritoActivo className="text-white text-2xl" />
-                    <h1 className="text-2xl text-white font-semibold">
-                        Favoritos
-                    </h1>
+                    <h1 className="text-2xl text-white font-semibold">Favoritos</h1>
                 </div>
 
                 <Tooltip showArrow className="text-primary-dark bg-white" content="Cerrar">
@@ -32,13 +52,15 @@ export default function DrawerComponent({ isOpen, toggleDrawer, favs }: { isOpen
                         onClick={toggleDrawer}
                         className="text-primary-dark bg-transparent"
                         isIconOnly
-                        color='warning'
-                        variant='light'
+                        color="warning"
+                        variant="light"
                     >
                         <icons.close className="text-white text-2xl" />
                     </Button>
                 </Tooltip>
             </div>
+
+            {/* Contenido */}
             <div className="p-4 h-full w-full bg-neutral items-center overflow-y-auto pb-28">
                 {loading && (
                     <div className="flex items-center justify-center h-full">
@@ -64,5 +86,5 @@ export default function DrawerComponent({ isOpen, toggleDrawer, favs }: { isOpen
                 )}
             </div>
         </Drawer>
-    )
+    );
 }

@@ -1,16 +1,16 @@
 import servicios from "./ScrollCarousel/Servicios";
 import { useRouter } from "next/navigation";
-
 import { motion } from "framer-motion";
 
 const ServiceCard = ({ title, description, img, href }: any) => {
     const router = useRouter();
 
     return (
-        <div
+        <motion.div
             className="relative flex flex-col items-end space-y-3 w-full h-52 bg-cover bg-center rounded-lg overflow-hidden cursor-pointer"
             style={{ backgroundImage: `url('${img}')` }}
             onClick={() => router.push(href)}
+            whileTap={{ scale: 0.95 }} // Reducción al hacer tap
         >
             <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -20,7 +20,7 @@ const ServiceCard = ({ title, description, img, href }: any) => {
             >
                 {title}
             </motion.h2>
-        </div>
+        </motion.div>
     );
 };
 
