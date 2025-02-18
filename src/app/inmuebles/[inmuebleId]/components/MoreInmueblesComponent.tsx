@@ -36,7 +36,7 @@ export default function MoreInbueblesComponent({ currentInmueble }: { currentInm
                         clickable: true,
                         dynamicBullets: true,
                     }}
-                    className="custom-swiper mini-swiper rounded-lg"
+                    className="custom-swiper mini-swiper rounded-lg swiper-padding"
                     modules={[Pagination, Autoplay]}
                     loop
                     autoplay={{
