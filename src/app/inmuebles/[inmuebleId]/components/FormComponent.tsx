@@ -32,6 +32,7 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
                     variant="underlined"
                     color="warning"
                     name="nombre"
+                    size="lg"
                     className="text-primary-dark/60"
                     isRequired
                     required
@@ -44,6 +45,7 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
                     variant="underlined"
                     color="warning"
                     name="correo"
+                    size="lg"
                     className="text-primary-dark/60"
                     isRequired
                     required
@@ -56,6 +58,7 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
                     variant="underlined"
                     color="warning"
                     name="telefono"
+                    size="lg"
                     className="text-primary-dark/60"
                     isRequired
                     required
@@ -68,6 +71,7 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
                     variant="underlined"
                     color="warning"
                     name="mensaje"
+                    size="lg"
                     className="text-primary-dark/60"
                     isRequired
                     required
@@ -81,7 +85,7 @@ export default function FormComponent({ inmueble }: { inmueble: Inmueble }) {
                         className="text-white"
                         variant="solid"
                         color="warning"
-                        size="md"
+                        size="lg"
                     >
                         Enviar
                     </Button>

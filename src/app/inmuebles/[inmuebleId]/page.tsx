@@ -4,6 +4,7 @@ import { use } from "react";
 
 import useScreenSize from "@/hooks/useScreenSize";
 import DesktopViewInmuebleShowcase from "./components/DesktopViewInmuebleShowcase";
+import MobileViewInmuebleShowcase from "./components/MobileViewInmuebleShowcase";
 import useInmueble from "@/hooks/useInmueble";
 import { Spinner } from "@nextui-org/spinner";
 
@@ -29,6 +30,7 @@ export default function InmuebleIdPage({
         <>
             <section className="w-full h-full">
                 {screenSize === "desktop" && <DesktopViewInmuebleShowcase inmueble={inmueble!} loading={loading} />}
+                {screenSize === "mobile" && <MobileViewInmuebleShowcase inmueble={inmueble!} loading={loading} />}
             </section>
         </>
     );
