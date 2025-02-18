@@ -17,6 +17,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import FooterComponent from "@/app/components/FooterComponent";
 import DrawerComponent from "@/app/inmuebles/components/Navbar/DrawerComponent";
 import { Tooltip } from "@nextui-org/react";
+import { motion } from "framer-motion";
 
 import { useState } from "react";
 
@@ -114,22 +115,28 @@ export default function NavbarComponent({ children }: { children?: ReactNode }) 
         <NavbarContent justify="end">
           <NavbarItem>
             <Tooltip showArrow color="warning" className="text-white" content="Favoritos">
-              <Button isIconOnly onPress={toggleDrawer} className="bg-transparent" variant="light" color="warning" href="#">
+              <Button isIconOnly onPress={toggleDrawer} className="bg-transparent" variant="light" color="warning" disableRipple>
                 <icons.favoritoDesactivado className="text-2xl text-primary-dark" />
               </Button>
             </Tooltip>
           </NavbarItem>
         </NavbarContent>
 
-        <NavbarMenu>
+        <NavbarMenu className="items-center flex flex-col gap-5 pt-6 w-full">
           {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                className="w-full"
-                href={item.href}
+            <NavbarMenuItem key={`${item}-${index}`} className="w-full">
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: .3, delay: ((index + 1) * 0.05) }}
               >
-                {item.label}
-              </Link>
+                <Link
+                  className={`w-full text-3xl font-semibold p-2 rounded-lg ${pathname === item.href ? "text-secondary" : "text-primary-dark"}`}
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+              </motion.div>
             </NavbarMenuItem>
           ))}
         </NavbarMenu>

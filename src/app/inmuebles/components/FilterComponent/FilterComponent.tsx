@@ -36,7 +36,7 @@ export interface FilterComponentProps {
     type?: string;
 }
 
-export default function FilterComponent({ filters, setFilters, isExpanded, setIsExpanded }: { filters: FilterComponentProps[], setFilters: Function; isExpanded: boolean; setIsExpanded: Function }) {
+export default function FilterComponent({ filters, setFilters, isExpanded, setIsExpanded, showArrow, closeDrawer, isMobile }: { filters: FilterComponentProps[], setFilters: Function; isExpanded: boolean; setIsExpanded: Function; showArrow?: string; closeDrawer?: any; isMobile?: boolean }) {
 
     const [mockFilters, setMockFilters] = useState<FilterComponentProps[]>([]);
 
@@ -162,15 +162,17 @@ export default function FilterComponent({ filters, setFilters, isExpanded, setIs
     };
 
     return (
-        <div className="w-full bg-white rounded-lg h-[550px] flex flex-col">
+        <div className={`w-full bg-white rounded-lg ${isMobile ? "h-full" : "h-[550px]"} flex flex-col`}>
             {/* Header fijo */}
             <div className="flex flex-row justify-between items-center bg-primary-dark rounded-t-lg">
                 <h3 className="text-white bg-primary-dark px-4 p-1 font-semibold text-xl rounded-t-lg">
                     Filtros
                 </h3>
-                <Button isIconOnly color="warning" variant="light" onPress={() => setIsExpanded(!isExpanded)}>
-                    <IoMdArrowRoundBack className="font-black size-7 text-white" />
-                </Button>
+                {showArrow && (
+                    <Button isIconOnly color="warning" variant="light" onPress={() => setIsExpanded(!isExpanded)}>
+                        <IoMdArrowRoundBack className="font-black size-7 text-white" />
+                    </Button>
+                )}
             </div>
 
 
@@ -252,7 +254,7 @@ export default function FilterComponent({ filters, setFilters, isExpanded, setIs
             {/* Botón fijo */}
             <div className="relative flex w-full items-center justify-center py-4">
                 {mockFilters.length > 0 ? (
-                    <Button onPress={handleSetFilters} color="warning" className="text-white font-semibold w-full">
+                    <Button onPress={() => { handleSetFilters(); closeDrawer(); }} color="warning" className="text-white font-semibold w-full">
                         Aplicar
                     </Button>
                 ) : (
